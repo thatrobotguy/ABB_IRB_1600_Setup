@@ -54,8 +54,11 @@ wlp0s20f3 Link encap:Ethernet  HWaddr not:for:you:sucka
           RX bytes:17042440 (17.0 MB)  TX bytes:2453717 (2.4 MB)
 
 ```
+Given this output, I would type this:
+```
+sudo arp-scan --interface=enp7s0f1 –localnet
+```
 If this errors out, you probably need to either install the software of check your spelling.
-`sudo arp-scan --interface=enp7s0f1 –localnet`
 
 
 
