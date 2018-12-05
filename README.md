@@ -63,4 +63,6 @@ I should also mention that the address you choose _must_ be in the range of `192
 Now that you have figured out what IP addresses are currently is use, decide what IP address you would like to use. 
 You first need to click on the internet symbol in the upper right hand corner:
 
+![Image of Ubuntuwifi](https://github.com/thatrobotguy/WPI_ABB_IRB_1600_Setup/blob/master/upperrightcorner.png)
+
 ### Documentation written by thatrobotguy
