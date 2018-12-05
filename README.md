@@ -4,7 +4,7 @@ This is the repository that explains how to set up the ABB IRB 1600 robot arm at
 ## Prerequisites
 This guide assumes many things about the people reading it. This guide is not for those kinds of people without any experience with ROS.
 
-#### Things to have setup before starting on this guide
+#### Things to have set up before starting on this guide
 1. A working installation of Ubuntu 1604 on any computer
 2. This computer must have an ethernet port. Theoretically, you could run this installation with a USB to Ethernet adapter, but we have not tried that.
 3. ROS Kinetic
