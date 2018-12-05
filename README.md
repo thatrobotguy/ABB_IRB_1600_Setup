@@ -7,10 +7,12 @@ This guide assumes many things about the people reading it. This guide is not fo
 ### Things to have setup before starting on this guide
 1. A working installation of Ubuntu 1604 on any computer
 2. This computer must have an ethernet port. Theoretically, you could run this installation with a USB to Ethernet adapter, but we have not tried that.
-2. ROS Kinetic
-3. Python 2.7
-4. Skills on the Linux terminal
-7. Counting
+3. ROS Kinetic
+4. Python 2.7
+5. Skills on the Linux terminal
+6. Stable internet connection
+7. git
+8. Your favorite text editor
 
 ## In the beginning...
 The first thing you will need to do is set up a static ip address on your ethernet nic. In order to network with the robot, you will be connecting you device to an ethernet port on a network switch. At the time of writing, this is an 8 port switch sitting on top of the robot controller, but this is expected to be upgraded soon.
