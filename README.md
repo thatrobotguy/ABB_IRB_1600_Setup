@@ -58,8 +58,9 @@ Given this output, I would type this:
 ```
 sudo arp-scan --interface=enp7s0f1 –localnet
 ```
-If this errors out, you probably need to either install the software of check your spelling.
-
-
+If this errors out, you probably need to either install `arp-scan` or check your spelling.
+I should also mention that the address you choose _must_ be in the range of `192.168.1xx.2` to `92.168.1xx.255`.
+Now that you have figured out what IP addresses are currently is use, decide what IP address you would like to use. 
+You first need to
 
 ### Documentation written by thatrobotguy
