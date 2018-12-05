@@ -28,3 +28,7 @@ This will list all of the IP addresses on the network that you have attached to 
 In order to find out what your ethernet IP is, just run `ifconfig`. You should see something like this:
 If this errors out, you probably need to either install the software of check your spelling.
 `sudo arp-scan --interface=enp7s0f1 –localnet`
+
+
+
+### Documentation written by thatrobotguy
