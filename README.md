@@ -69,4 +69,5 @@ Now you need to select the ethernet option in the next menu like so:
 
 ![Image of network options](https://github.com/thatrobotguy/WPI_ABB_IRB_1600_Setup/blob/master/networkoptions.png)
 
+Then you click `edit`.
 ### Documentation written by thatrobotguy
