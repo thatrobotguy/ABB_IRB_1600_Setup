@@ -65,4 +65,8 @@ You first need to click on the internet symbol in the upper right hand corner (f
 
 ![Image of Ubuntuwifi](https://github.com/thatrobotguy/WPI_ABB_IRB_1600_Setup/blob/master/upperrightcorner.png)
 
+Now you need to select the ethernet option in the next menu like so:
+
+![Image of network options](https://github.com/thatrobotguy/WPI_ABB_IRB_1600_Setup/blob/master/networkoptions.png)
+
 ### Documentation written by thatrobotguy
