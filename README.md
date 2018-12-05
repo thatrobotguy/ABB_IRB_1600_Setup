@@ -25,7 +25,35 @@ The a device attempts to connect to the arm, the arm expects ab IP address of `1
 sudo arp-scan --interface=myethernetcardname –localnet
 ```
 This will list all of the IP addresses on the network that you have attached to your ethernet port on your laptop.
-In order to find out what your ethernet IP is, just run `ifconfig`. You should see something like this:
+In order to find out what your ethernet IP is, just run `ifconfig`. You should see something like this on the output:
+```
+$USER@$USER-MyComputerModel:~$ ifconfig
+enp7s0f1  Link encap:Ethernet  HWaddr jokes:on:you:bro
+          UP BROADCAST MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:277219 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:277219 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:45637381 (45.6 MB)  TX bytes:45637381 (45.6 MB)
+
+wlp0s20f3 Link encap:Ethernet  HWaddr not:for:you:sucka
+          inet addr:192.168.0.23  Bcast:192.168.0.255  Mask:255.255.255.0
+          inet6 addr: fe80::a11f:ab53:e881:ad/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:20356 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:12788 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:17042440 (17.0 MB)  TX bytes:2453717 (2.4 MB)
+
+```
 If this errors out, you probably need to either install the software of check your spelling.
 `sudo arp-scan --interface=enp7s0f1 –localnet`
 
