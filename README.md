@@ -375,9 +375,9 @@ You need to select
 
 `Control Panel`
 
-and then look down low at the last option in the list above the boot options. If I remember correctly, it contains buzzwords like
+and then look down low at the last option in the list above the boot options. 
 
-“activation” and “select system”
+The option is `installed systems`.
 
 or something like that. I am just forgetting at the moment.
 
