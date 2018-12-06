@@ -23,7 +23,7 @@
 
 // Make sure we have access to the necessary messages.
 #include <geometry_msgs/Pose.h>
-//#include <std_msgs/Bool.msg>
+
 #include "std_msgs/String.h"
 #include "std_msgs/Bool.h"
 
