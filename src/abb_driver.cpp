@@ -46,6 +46,8 @@ bool dowehavenewpose = false;
 // Is the arm done moving?
 std_msgs::Bool armdonemoving;
 
+std::string base_frame = "/base_link";
+
 // This is the callback function for receiving the pose we want to go to
 void poseCallback(const geometry_msgs::Pose& msg)
 {
@@ -90,7 +92,7 @@ int main(int argc, char** argv)
     This node pulblishes to a topic so that other nodes can know that 
     the robot is busy moving to a pose provided by this node. 
   */
-  ros::Publisher pub = node_handle.advertise<std_msgs::Bool>("is_arm_moving", 1); // 1 is the queue size.
+  ros::Publisher pub = node_handle.advertise<std_msgs::Bool>("/is_arm_moving", 1); // 1 is the queue size.
   // Here we start a background thread to handle spinning.
   ros::AsyncSpinner spinner(1);
   spinner.start();
@@ -147,6 +149,9 @@ int main(int argc, char** argv)
   // Initialize the is moving boolean
   armdonemoving.data=false;
   pub.publish(armdonemoving);
+
+  // Just in case the base link is NOT the home position, it SHOULD BE
+  move_group.setPoseReferenceFrame(base_frame);
 
   // This is the main program while loop.
   while (ros::ok())
