@@ -69,12 +69,13 @@ Now you need to select the ethernet option in the next menu like so:
 
 ![Image of network options](https://github.com/thatrobotguy/WPI_ABB_IRB_1600_Setup/blob/master/networkoptions.png)
 
-Then you click `edit`. Now, go to the IPv4 settings tab and click `add`. Set your machine IP like this:
+Then you click `edit`. Now, go to the IPv4 settings tab and set the `Method` to `Manual` and then click `add`. Set your machine IP like this:
 
 ![Image of ipv4 settings](https://github.com/thatrobotguy/WPI_ABB_IRB_1600_Setup/blob/master/ipv4_settings.png)
 
+Now once these are set you will want to click `save` and then restart your machine to make sure all your changes are written properly.
 
-
+# ROS Setup
 
 Now that I have gotten the robot to move, I have compiled here the steps I used to get the environment installed on my machine. These were mainly quick notes and mild scratch work, but I think it gets the idea across. I should thank the MQP team for pointing me in the right direction while I created this list of steps. If anybody feels there are changes that need to be made, do mention it. I also should mention that, since some components are out of order, you should read the document in its entirety before embarking on the installation of ROS Industrial and MoveIt!.
 
