@@ -364,6 +364,9 @@ More good links:
 https://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/move_group_interface/move_group_interface_tutorial.html
 https://docs.ros.org/kinetic/api/moveit_tutorials/html/index.html
 https://wiki.ros.org/ROS/EnvironmentVariables
-
+https://industrial-training-master.readthedocs.io/en/latest/_source/session4/Motion-Planning-CPP.html#further-information-and-resources
+https://industrial-training-master.readthedocs.io/en/latest/_source/session2/Launch-Files.html
+https://industrial-training-master.readthedocs.io/en/latest/_source/session2/Actions.html
+https://industrial-training-master.readthedocs.io/en/latest/_source/session3/Build-a-Moveit!-Package.html
 
 ### Documentation written by thatrobotguy
