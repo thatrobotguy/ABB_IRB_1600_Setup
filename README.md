@@ -333,4 +333,19 @@ I find that the ROS stuff is more stable if you start the robot “pp to main”
 
 I believe that this is everything required to get the arm to work. You should call the uppermost launch file described earlier in their own custom launch file in their own custom ROS package so that they do not have any of the ROS-Industrial packages in their personal git repositories. The MQP team made that mistake already.
 
+Sometimes you may get this error while running in manual mode:
+```
+[ERROR] [1544201172.958564157]: Controller is taking too long to execute trajectory (the expected upper bound for the trajectory execution was 4.625994 seconds). Stopping trajectory.
+```
+You need to look at that 3rd launch flie I provided and give the robot more time to execute trajectories.
+You can do that by changing this line:
+```
+<param name="trajectory_execution/execution_duration_monitoring" value="true" />
+```
+To this line:
+```
+<param name="trajectory_execution/execution_duration_monitoring" value="false" />
+```
+It will no longer care about how long the trajectories take. When you start using Automatic mode, you should probably turn this back on.
+
 ### Documentation written by thatrobotguy
