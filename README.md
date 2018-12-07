@@ -129,18 +129,9 @@ You will also have to apt install this thing:
 
 sudo apt-get install ros-kinetic-tf2-geometry-msgs
 
-Now you need to install MoveIt! Go to this link to do this:
+Now you need to install MoveIt! You can go [here to install](http://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/getting_started/getting_started.html) the regular way or you can go [here to install](http://moveit.ros.org/install/source/) from source. I expect that, when you get to the second page from the first link, you cannot go further. This is because you need to do the advanced setup for MoveIt (build from source) since you still do not have all of the necessary packages set up. I am almost certain you will have this problem. As a result, you will have to follow the second link anyways. I believe the MQP team said they had to build from source anyways. When you build from source, make sure that you go to the bottom of the page and use the `build from source` instructions that uses the `ROS_DISTRO` environment variable. As a reminder, this is the [link to the main website](https://moveit.ros.org/
+) for the MoveIt libraries.
 
-http://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/getting_started/getting_started.html
-
-I expect that, when you get to the second page, you cannot go further. This is because you need to do the advanced setup for MoveIt since you still do not have all of the necessary packages set up. I am almost certain you will have this problem. As a result, you will have to build from source. I believe the MQP team said they had to do this. Here is the link to do this:
-
-http://moveit.ros.org/install/source/
-
-Make sure that you go to the bottom of the page and use the build from source instructions that uses the `ROS_DISTRO` environment variable. 
-As a reminder, this is the link to the main website for the MoveIt libraries:
-
-https://moveit.ros.org/
 
 You now need the abb robot driver. This is in the non-experimental abb repository for ros industrial.
 This is the link you need to git clone.
