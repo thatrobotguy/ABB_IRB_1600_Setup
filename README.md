@@ -108,20 +108,7 @@ Supposedly you do not need to set ROS_MASTER_URI or ROS_HOSTNAME, but I seem to 
 If you do not want to use `hostname -I`, you can run `ifconfig` and look for `inet addr: xxx.xxx.xxx.xxx` to set the address.
 Make sure to run `source ~/.bashrc` in all open terminals once that is all done.
 
-Now you need to `cd` into your catkin workspace source folder, which is for me
-
-`~/catkin_ws/src/`
-
-You will need to git clone some repositories into your workspace.
-
-Git clone this one for kinetic-devel
-https://github.com/ros-industrial/abb_experimental
-
-Run `git branch -a` to figure out what branch you are currenly on. If you are on the wrong branch, run
-
-`git checkout kinetic-devel`
-
-that will put you on the correct branch.
+# MoveIt! Installation
 
 Next, you will want to go to the [link provided here](http://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/trac_ik/trac_ik_tutorial.html) and run the `sudo apt-get install xxxxxxx` commands.
 
@@ -132,11 +119,27 @@ sudo apt-get install ros-kinetic-tf2-geometry-msgs
 Now you need to install MoveIt! You can go [here to install](http://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/getting_started/getting_started.html) the regular way or you can go [here to install](http://moveit.ros.org/install/source/) from source. I expect that, when you get to the second page from the first link, you cannot go further. This is because you need to do the advanced setup for MoveIt (build from source) since you still do not have all of the necessary packages set up. I am almost certain you will have this problem. As a result, you will have to follow the second link anyways. I believe the MQP team said they had to build from source anyways. When you build from source, make sure that you go to the bottom of the page and use the `build from source` instructions that uses the `ROS_DISTRO` environment variable. As a reminder, this is the [link to the main website](https://moveit.ros.org/
 ) for the MoveIt libraries.
 
+# ABB Specific Installation
+
+Once you have built the moveit libraries from source, we need to get the ABB specific packages.
+
+You need to `cd` into your catkin workspace source folder, which is for me
+
+`~/catkin_ws/src/`
+
+You will need to git clone some repositories into your workspace.
+
+Git clone this one on the `kinetic-devel` branch.
+https://github.com/ros-industrial/abb_experimental
+
+Run `git branch -a` to figure out what branch you are currenly on. If you are on the wrong branch, run
+
+`git checkout kinetic-devel`
+
+that will put you on the correct branch.
 
 You now need the abb robot driver. This is in the non-experimental abb repository for ros industrial.
-This is the link you need to git clone.
-
-https://github.com/ros-industrial/abb.git
+This is the [link you need](https://github.com/ros-industrial/abb.git) to git clone.
 
 You may not have to git clone `abb` because building from source automatically git clone the necessary packages to your catkin workspace.
 
