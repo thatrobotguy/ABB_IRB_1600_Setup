@@ -114,9 +114,9 @@ Next, you will want to go to the [link provided here](http://docs.ros.org/kineti
 
 You will also have to apt install this thing:
 
-sudo apt-get install ros-kinetic-tf2-geometry-msgs
+`sudo apt-get install ros-kinetic-tf2-geometry-msgs`
 
-Now you need to install MoveIt! You can go [here to install](http://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/getting_started/getting_started.html) the regular way or you can go [here to install](http://moveit.ros.org/install/source/) from source. I expect that, when you get to the second page from the first link, you cannot go further. This is because you need to do the advanced setup for MoveIt (build from source) since you still do not have all of the necessary packages set up. I am almost certain you will have this problem. As a result, you will have to follow the second link anyways. I believe the MQP team said they had to build from source anyways. When you build from source, make sure that you go to the bottom of the page and use the `build from source` instructions that uses the `ROS_DISTRO` environment variable. As a reminder, this is the [link to the main website](https://moveit.ros.org/
+Now you need to install MoveIt! You can go [here to install](http://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/getting_started/getting_started.html) the regular way or you can go [here to install](http://moveit.ros.org/install/source/) from source. I expect that, when you get to the second page from the first link, you cannot go further. This is because you need to do the advanced setup for MoveIt (build from source) since you still do not have all of the necessary packages set up. I am almost certain you will have this problem. As a result, you will have to follow the second link anyways. I believe the MQP team said they had to build from source anyways. When you build from source, make sure that you go to the bottom of the page and use the `build from source` instructions that uses the `ROS_DISTRO` environment variable. Also, where the MoveIt advanced install instructions say to do `catkin build`, you really want to do `catkin_make`. As a reminder, this is the [link to the main website](https://moveit.ros.org/
 ) for the MoveIt libraries.
 
 # ABB Specific Installation
@@ -143,31 +143,20 @@ This is the [link you need](https://github.com/ros-industrial/abb.git) to git cl
 
 You may not have to git clone `abb` because building from source automatically git clone the necessary packages to your catkin workspace.
 
-NOW that you have downloaded all of those repositories into your workspace, you can finally run
+NOW that you have downloaded all of those repositories into your workspace, you can finally run `catkin_make` in
+`/home/$USER/catkin_ws/`.
 
-`catkin_make` 
+I should note that you should NOT `catkin_make` until everything is git cloned, installed, or built.
 
-in
-
-`/home/$USER/catkin_ws/`
-
-I should note that you should NOT catkin_make until everything is git cloned, installed, or built. Also, where the MoveIt advanced install instructions say to do `catkin build`, you really want to do catkin_make.
+# Package Modifications
 
 Once you have gotten the installations squared away, we will have to do some manual modifications of launch files before you connect the robot to ROS.
 
-In this ros package:
-
-`abb_experimental`
-
-There is a subpackage:
-
-`abb_irb1600_6_12_moveit_config`
-
-With this launch file:
-
+In the ros package `abb_experimental` there is a subpackage called `abb_irb1600_6_12_moveit_config` with this launch file:
+```
 moveit_planning_execution.launch
-
-You need to edit this launch file to decouple joints 2 and 3. 
+```
+You need to edit this launch file to decouple joints 2 and 3.
 
 For me, this file is located here:
 
