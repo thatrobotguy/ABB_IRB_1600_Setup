@@ -347,5 +347,10 @@ To this line:
 <param name="trajectory_execution/execution_duration_monitoring" value="false" />
 ```
 It will no longer care about how long the trajectories take. When you start using Automatic mode, you should probably turn this back on.
+You could also make this value larger:
+```
+<param name="trajectory_execution/allowed_goal_duration_margin" value="3.5"/> <!-- default 0.5 -->
+```
+But if you are in manual mode it is easier to just turn of this safety.
 
 ### Documentation written by thatrobotguy
