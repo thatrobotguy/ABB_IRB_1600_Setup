@@ -357,6 +357,6 @@ You could also make this value larger:
 ```
 But if you are in manual mode it is easier to just turn of this safety.
 
-You may also encounter [this issue](https://github.com/qboticslabs/mastering_ros/issues/24) while trying to drive the robot. Also, if you are wanting to listen to transforms, you need to create a listener AFTER you call initnode. This means that you cannot create a global variable listener outside of `main()` or `rosrun` will not work.
+You may also encounter [this issue](https://github.com/qboticslabs/mastering_ros/issues/24) while trying to drive the robot. Also, if you are wanting to listen to transforms, you need to create a listener AFTER you call initnode. This means that you cannot create a global variable listener outside of `main()` or `rosrun mypackage mynodewithtflisteners` will not work.
 
 ### Documentation written by thatrobotguy
