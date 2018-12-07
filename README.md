@@ -316,6 +316,10 @@ STOP! NEVER FORGET THIS LAST STEP!
 
 Press `play` on the teach pendant. ONLY THEN can you execute trajectories.
 
+BUT WAIT! THE TEACH PENDANT ERRORS OUT!
+
+You must be pressing the motors enable grip down just enough to enable the motors before your program will run, even if you are controlling everthing with ROS.
+
 ## How to start up the ABB IRB 1600 ROS Node
 
 Now that you have installed everything and modified those 2 xml/launch files, you can now run this command to start the simulated robot up with ROS:
