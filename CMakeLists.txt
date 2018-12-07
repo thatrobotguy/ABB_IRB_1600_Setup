@@ -157,7 +157,7 @@ include_directories(
 #   ${catkin_LIBRARIES}
 # )
 
-add_executable(abb_mover src/abb_driver.cpp)
+add_executable(abb_mover src/abb_mover.cpp)
 target_link_libraries(abb_mover ${catkin_LIBRARIES} ${Boost_LIBRARIES} )
 
 #############
