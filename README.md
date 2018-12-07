@@ -123,11 +123,7 @@ Run `git branch -a` to figure out what branch you are currenly on. If you are on
 
 that will put you on the correct branch.
 
-Next, you will want to go to the link provided here and run the commands
-
-`sudo apt-get install xxxxxxx`
-
-http://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/trac_ik/trac_ik_tutorial.html
+Next, you will want to go to the [link provided here](http://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/trac_ik/trac_ik_tutorial.html) and run the `sudo apt-get install xxxxxxx` commands.
 
 You will also have to apt install this thing:
 
@@ -141,12 +137,7 @@ I expect that, when you get to the second page, you cannot go further. This is b
 
 http://moveit.ros.org/install/source/
 
-Make sure that you go to the bottom of the page and notice the phrase
-
-rosdistro
-
-This is Kinetic for this installation.
-
+Make sure that you go to the bottom of the page and use the build from source instructions that uses the `ROS_DISTRO` environment variable. 
 As a reminder, this is the link to the main website for the MoveIt libraries:
 
 https://moveit.ros.org/
