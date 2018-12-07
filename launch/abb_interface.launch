@@ -4,10 +4,10 @@
 <!--Load settings as parameters from .yaml-->
 <!-- This is modified from the mqp repo -->
   <group ns="home_pose">
-    <rosparam command="load" file="$(find andrewdonaldkaan_abb1600)/launch/abb_home.yaml" />
+    <rosparam command="load" file="$(find abb_1600_driver)/launch/abb_home.yaml" />
   </group>
     <!-- Node name, package name, what the name of the node is from the cpp file, the last thing I do not know. -->
- <node name="abb_mover" pkg="andrewdonaldkaan_abb1600" type="abb_mover"  output="screen"> 
+ <node name="abb_mover" pkg="abb_1600_driver" type="abb_mover"  output="screen"> 
     
   </node>
 

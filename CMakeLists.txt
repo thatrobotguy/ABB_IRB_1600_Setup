@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(andrewdonaldkaan_abb1600)
+project(abb_1600_driver)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
