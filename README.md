@@ -355,7 +355,7 @@ You could also make this value larger:
 ```
 <param name="trajectory_execution/allowed_goal_duration_margin" value="3.5"/> <!-- default 0.5 -->
 ```
-But if you are in manual mode it is easier to just turn of this safety.
+But if you are in manual mode it is easier to just turn of this safety. [This link](https://answers.ros.org/question/196586/how-do-i-disable-execution_duration_monitoring/) is also good.
 
 You may also encounter [this issue](https://github.com/qboticslabs/mastering_ros/issues/24) while trying to drive the robot. Also, if you are wanting to listen to transforms, you need to create a listener AFTER you call initnode. This means that you cannot create a global variable listener outside of `main()` or `rosrun mypackage mynodewithtflisteners` will not work.
 
