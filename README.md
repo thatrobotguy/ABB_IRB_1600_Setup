@@ -156,19 +156,12 @@ In the ros package `abb_experimental` there is a subpackage called `abb_irb1600_
 ```
 moveit_planning_execution.launch
 ```
-You need to edit this launch file to decouple joints 2 and 3.
-
-For me, this file is located here:
+You need to edit this launch file to decouple joints 2 and 3. For me, this file is located here:
 
 `/home/$USER/catkin_ws/src/abb_experimental/abb_irb1600_6_12_moveit_config/launch`
 
-
-
 I do not remember what the old version of the file looks like, but I only commented out lines. I did not delete anything.
-
-
-
-
+```
 <launch>
 <!-- The planning and execution components of MoveIt! configured to run -->
 <!-- using the ROS-Industrial interface. -->
@@ -239,26 +232,22 @@ controller_joint_names: [joint_1, joint_2, ... joint_N]
 </include>
 
 </launch>
+```
 
-
-
-
-
-This launch file described above also calls another launch file that also needs editing. The file you need to change is
-
+The launch file described above also calls another launch file that also needs editing. The file you need to change is
+```
 robot_interface_download_irb1600_6_12.launch
-
+```
 I created my own version called:
-
+```
 robot_interface_download_irb1600_6_12_modified.launch
-
+```
 So that I do not have to call the original launch file, which is located here:
-
+```
 /home/$USER/catkin_ws/src/abb_experimental/abb_irb1600_support/launch
-
+```
 This modified launch file looks like this:
-
-
+```
 <!--
 Manipulator specific version of abb_driver's 'robot_interface.launch'.
 
@@ -268,6 +257,7 @@ Defaults provided for IRB 1600:
 Usage:
 robot_interface_download_irb1600.launch robot_ip:=<value>
 -->
+
 <launch>
 <arg name="robot_ip" doc="IP of the controller" />
 <!-- Andrew moved this line into a comment.
@@ -283,27 +273,15 @@ robot_interface_download_irb1600.launch robot_ip:=<value>
 <arg name="J23_coupled" value="$(arg J23_coupled)" />
 </include>
 </launch>
+```
+In the upper launch file, I turned the couple_J_2_3 off as well as set the default IP address. Other than that, everything else is left alone.
+I did make one other change to the launch files. This one should NOT be necessary, nor is it recommended, but I have included it here so that I am not missing anything as I happened to make these changes in the process. I just have not gotten to changing them back to the original version on my ubuntu laptop. I edited this .xml file: `trajectory_execution.launch.xml`. (It is in the same directory as the upper level launch file, If I am not mistaken.)
 
-
-
-
-
-Overall,  modified the launch files above. I turned the couple_J_2_3 off as well as set the default IP address. Other than that, everything else is left alone.
-
-
-I did make one other change to the launch files. This one should NOT be necessary, nor is it recommended, but I have included it here so that I am not missing anything as I happened to make these changes in the process. I just have not gotten to changing them back to the original version on my ubuntu laptop. I edited this .xml file:
-
-`trajectory_execution.launch.xml`
-
-(It is in the same directory as the upper level launch file, If I am not mistaken.)
-
-And I got the idea to edit it from this post:
-
-https://answers.ros.org/question/196586/how-do-i-disable-execution_duration_monitoring/
-
+I got the idea to edit it [from this post.](https://answers.ros.org/question/196586/how-do-i-disable-execution_duration_monitoring/
+)
 
 Here is what the file looks like for me:
-
+```
 <launch>
 
 <!-- This file makes it easy to include the settings for trajectory execution --> 
@@ -331,15 +309,9 @@ https://answers.ros.org/question/196586/how-do-i-disable-execution_duration_moni
 <arg name="moveit_controller_manager" default="abb_irb1600_6_12" />
 <include file="$(find abb_irb1600_6_12_moveit_config)/launch/$(arg moveit_controller_manager)_moveit_controller_manager.launch.xml" />
 </launch>
-
-
+```
 Now that I have the ROS Node working, we have to now look at the robot arm itself and the teach pendant.
-
-The first order of business is to boot the robot arm into 
-
-`System2_ROS`
-
-You need to select 
+The first order of business is to boot the robot arm into `System2_ROS`. You need to select 
 
 `Control Panel`
 
