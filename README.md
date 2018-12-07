@@ -335,11 +335,4 @@ I should also mention that the static ip configuration should be done BEFORE run
 
 I believe that this is everything required to get the arm to work. If somebody decides to do this, they should call the uppermost launch file described earlier in their own custom launch file in their own custom ROS package so that they do not have any of the ROS-Industrial packages in their personal git repositories.
 
-If you want to find local Ips on the network, you can run this commands
-
-`sudo arp-scan --interface=enp7s0f1 –localnet`
-
-enp7s0f1 is the hardware ethernet device on my laptop. You will need to run `ifconfig` to figure out what yours should be. You can use this to make sure that the ABB robot is actually showing up on the network.
-
-
 ### Documentation written by thatrobotguy
