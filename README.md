@@ -87,33 +87,24 @@ https://wiki.ros.org/kinetic/Installation/Ubuntu
 ```
 
 I also have some environment variables set up in my ~/.bashrc file.
-
-# This is the line that connects my path to ROS 1 setup.bash.
-source /opt/ros/kinetic/setup.bash
-# I have to source this too.
-source ~/catkin_ws/devel/setup.bash
-# This is so that roscore knows where to run
-export ROS_MASTER_URI=http://192.168.0.23:11311
-export ROS_HOSTNAME=192.168.0.23
-
-Supposedly you do not need to set ROS_MASTER_URI or ROS_HOSTNAME, but I seem to get more stable results setting these environment variables.
-
-To find out what to set ROS_HOSTNAME to, I ran
-
-`ifconfig`
-
-on the terminal and then looked at where the phrase
-
-`inet addr: xxx.xxx.xxx.xxx`
-
-showed up.
-Then, for ROS_MASTER_URI, you run the same command on the machine you want to run roscore on, and then simply append `:11311` to the end and `http://` to the front.
-
-Make sure to run 
-
-`source ~/.bashrc`
-
-once that is all done.
+This is the line that connects my path to ROS 1 setup.bash:
+`source /opt/ros/kinetic/setup.bash`
+I have to source this too:
+`source ~/catkin_ws/devel/setup.bash`
+We also have to specifiy where `roscore` is running. We will be specifying that it runs on this Ubuntu laptop:
+```
+# Grab the machine IP addresses
+machine_ip=(`hostname -I`)
+rosport=':11311'
+rosmasterbegin='http://'
+# Now we set the ip location for roscore
+export ROS_MASTER_URI=$rosmasterbegin${machine_ip[0]}$rosport
+# This is the hostname of the current machine.
+export ROS_HOSTNAME=${machine_ip[0]}
+```
+Supposedly you do not need to set ROS_MASTER_URI or ROS_HOSTNAME, but I seem to get more stable results setting these environment variables, I am telling you to do the same.
+If you do not want to use `hostname -I`, you can run `ifconfig` and look for `inet addr: xxx.xxx.xxx.xxx` to set the address.
+Make sure to run `source ~/.bashrc` in all open terminals once that is all done.
 
 Now you need to `cd` into your catkin workspace source folder, which is for me
 
