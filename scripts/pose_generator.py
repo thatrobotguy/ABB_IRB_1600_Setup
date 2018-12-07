@@ -42,8 +42,8 @@ class TestABBPoseGeneration:
     # Bottom left point in square
     pose_goal = geometry_msgs.msg.Pose()
     pose_goal.orientation.w = 1.0
-    pose_goal.position.x = self.homepose.position.x-float(100.0 / 1000.0)
-    pose_goal.position.y = self.homepose.position.y
+    pose_goal.position.x = self.homepose.position.x#-float(100.0 / 1000.0)
+    pose_goal.position.y = self.homepose.position.y-float(100.0 / 1000.0)
     pose_goal.position.z = self.homepose.position.z #-float(100.0 / 1000.0)
 
     # first, we append the home position.

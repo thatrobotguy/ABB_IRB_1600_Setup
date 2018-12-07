@@ -33,6 +33,9 @@
 #include <math.h>
 #include <tf/transform_datatypes.h>
 
+// For cout
+#include <iostream>
+
 
 // "manipulator" is for the abb arm.
 static const std::string PLANNING_GROUP = "manipulator";
@@ -57,7 +60,7 @@ std::string base_frame = "/base_link";
 //Location variables set at launch
 float roll, pitch, yaw;
 float x, y, z;
-
+tf::Quaternion q_rot;
 
 
 // This is the callback function for receiving the pose we want to go to
@@ -179,14 +182,15 @@ int main(int argc, char** argv)
   roll=roll*(M_PI/180);
   pitch=pitch*(M_PI/180);
   yaw=yaw*(M_PI/180);
-  tf::Quaternion q_rot;
+  
   // tf::TransformListener listener;
   // create quarternion
   q_rot = tf::createQuaternionFromRPY(roll, pitch, yaw);
+  
   // Now we set the end of arm tooling orientation.
   // quaternionTFToMsg(q_rot,poseEOAT.orientation);
   quaternionTFToMsg(q_rot,mypose.orientation);
-
+  std::cout << "This is the quarternion for the end effector: \n" << mypose.orientation << std::endl;
 
   // The part I ripped above was solely to orient the eoat in the same orientation for all x,y,z.
 
