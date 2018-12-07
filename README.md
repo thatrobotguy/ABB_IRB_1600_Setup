@@ -81,7 +81,7 @@ First, you will need to make sure you have `ros-kinetic-desktop-full` installed 
 ```
 /home/$USER/catkin_ws/
 ```
-This may be different on your system. If you have not yet done this installation you can go to [link this link](https://wiki.ros.org/kinetic/Installation/Ubuntu).
+This may be different on your system. If you have not yet done this installation you can go to [this link](https://wiki.ros.org/kinetic/Installation/Ubuntu).
 
 I also have some environment variables set up in my ~/.bashrc file.
 This is the line that connects my path to ROS 1 setup.bash:
