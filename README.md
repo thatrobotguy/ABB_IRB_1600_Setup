@@ -331,8 +331,6 @@ roslaunch abb_irb1600_6_12_moveit_config moveit_planning_execution.launch robot_
 
 I find that the ROS stuff is more stable if you start the robot “pp to main” first, then run the launch file. You also do not need to start roscore separately as the launch file will do that for you. If you run into issues with roscore not working, you probably need to make sure you set the environment variables properly.
 
-I should also mention that the static ip configuration should be done BEFORE running the robot arm RAPID program. I did not really explain that well earlier. This is a rough draft...ss
-
-I believe that this is everything required to get the arm to work. If somebody decides to do this, they should call the uppermost launch file described earlier in their own custom launch file in their own custom ROS package so that they do not have any of the ROS-Industrial packages in their personal git repositories.
+I believe that this is everything required to get the arm to work. You should call the uppermost launch file described earlier in their own custom launch file in their own custom ROS package so that they do not have any of the ROS-Industrial packages in their personal git repositories. The MQP team made that mistake already.
 
 ### Documentation written by thatrobotguy
