@@ -31,19 +31,16 @@ class TestABBPoseGeneration:
     self.homepose.position.z=float(1194.48 / 1000.0)
     # We are going to create an array containting the poses we will navigate to.
     self.squareposes=[]
-
     """
-    ASSUME UNITS ARE IN METERS!!!!
+    UNITS ARE IN METERS!!!!
 
     Positive X means that it moves away from the TA office/lounge
     Positive y means that it moves towards WHRL Labs
     Positive z means that it moves towards heaven
-
     """
-
     # Bottom left point in square
     pose_goal = geometry_msgs.msg.Pose()
-    pose_goal.orientation.w = 1.0
+    #pose_goal.orientation.w = 1.0
     pose_goal.position.x = -0.5 # - float(100.0 / 1000.0)
     pose_goal.position.y = -0.5 # - float(100.0 / 1000.0)
     pose_goal.position.z = 0.5 # - float(100.0 / 1000.0)
