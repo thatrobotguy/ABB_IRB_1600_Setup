@@ -15,7 +15,7 @@ This guide assumes many things about the people reading it. This guide is not fo
 8. Your favorite text editor
 
 ### In the beginning...
-The first thing you will need to do is set up a static ip address on your ethernet nic. In order to network with the robot, you will be connecting your device to an ethernet port on a network switch. At the time of writing of this document, this is an 8 port switch sitting on top of the robot controller. This switch is expected to be upgraded soon, so ask the prof if you cannot find it.
+The first thing you will need to do is set up a static ip address on your ethernet nic. In order to network with the robot, you will be connecting your device to an ethernet port on a network switch. At the time of writing of this document, this is an 8 port switch sitting on top of the robot controller. This switch is expected to be upgraded soon, so ask the prof if you cannot find it. This documentation is mainly made up of quick notes and mild scratch work, but I think it gets the idea across. I should thank the MQP team for pointing me in the right direction while I created this list of steps. If anybody feels there are changes that need to be made, do mention it.  I have been making updates so that this document looks as clean as possible. I also should mention that, since some components are out of order, you should read the document in its entirety before embarking on the installation of ROS Industrial and MoveIt!. I hope to have this fixed soon.
 
 ## Static IP configuring
 In order to set a static ip address, you will first have to know some stuff.
@@ -77,14 +77,14 @@ Now once these are set you will want to click `save` and then restart your machi
 
 # ROS Setup
 
-Now that I have gotten the robot to move, I have compiled here the steps I used to get the environment installed on my machine. These were mainly quick notes and mild scratch work, but I think it gets the idea across. I should thank the MQP team for pointing me in the right direction while I created this list of steps. If anybody feels there are changes that need to be made, do mention it. I also should mention that, since some components are out of order, you should read the document in its entirety before embarking on the installation of ROS Industrial and MoveIt!.
-
-
-First, you will need to make sure you have ros-kinetic-desktop-full installed on your ubuntu 1604 linux machine. My ROS catkin workspace is located here:
-
+First, you will need to make sure you have `ros-kinetic-desktop-full` installed on your ubuntu 1604 linux machine. My ROS catkin workspace is located here:
+```
 /home/$USER/catkin_ws/
-
-This may be different on your system. If you have not yet done this installation, there are tutorials elsewhere that are way better than anything I could draft up.
+```
+This may be different on your system. If you have not yet done this installation, here is the link:
+```
+https://wiki.ros.org/kinetic/Installation/Ubuntu
+```
 
 I also have some environment variables set up in my ~/.bashrc file.
 
