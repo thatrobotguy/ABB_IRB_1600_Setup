@@ -316,39 +316,18 @@ STOP! NEVER FORGET THIS LAST STEP!
 
 Press `play` on the teach pendant. ONLY THEN can you execute trajectories.
 
+## How to start up the ABB IRB 1600 ROS Node
 
-ONE MORE STEP BEFORE ROS WILL WORK
+Now that you have installed everything and modified those 2 xml/launch files, you can now run this command to start the simulated robot up with ROS:
+```
+roslaunch abb_irb1600_6_12_moveit_config moveit_planning_execution.launch robot_ip:=192.168.100.100 sim:=true
+```
+Or start the real robot with ROS:
+```
+roslaunch abb_irb1600_6_12_moveit_config moveit_planning_execution.launch robot_ip:=192.168.100.100 sim:=false
+```
 
-When setting up networking for ROS, you can set the inet addr to the wifi address the WPI network gives you. HOWEVER, you need to set a STATIC IP ADDRESS, or the robot arm won’t connect to your machine.
-
-You can do this via the Ubuntu GUI interface since this is the easiest method for most people.
-
-Left click on the wifi icon in the upper right hand corner:
-
-
-
-(The button farthest to the left)
-
-Then select “Edit Connections”.
-
-Then, under the Ethernet dropdown, select the only wired connection available, and click “EDIT”. If you do not have one, click on the text “Ethernet” and click “ADD”.
-
-Move over to the “IPv4” tab and set “Method” to “Manual”.
-
-Select “ADD” to the right and then set the “Address” to any ip that is not currently in use. For me, I use  “192.168.100.123”. Then, set the “Net mask” to “24” and leave the “Gateway” blank. Then, click “Save” in the bottom right. Now the static ip address of the ethernet port on your laptop has been configured.
-
-Now that you have installed everything, modified those 2/3 xml/launch files, you can now run this command to start the simulated robot up with ROS:
-
-`roslaunch abb_irb1600_6_12_moveit_config moveit_planning_execution.launch robot_ip:=192.168.100.100 sim:=true`
-
-Or the real robot with ROS:
-
-`roslaunch abb_irb1600_6_12_moveit_config moveit_planning_execution.launch robot_ip:=192.168.100.100 sim:=false`
-
-Notice that this is actually one long line in the terminal. It just looks weird right now.
-
-
-Just some final notes:
+## Final notes
 
 I find that the ROS stuff is more stable if you start the robot “pp to main” first, then run the launch file. You also do not need to start roscore separately as the launch file will do that for you. If you run into issues with roscore not working, you probably need to make sure you set the environment variables properly.
 
