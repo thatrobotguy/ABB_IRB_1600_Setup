@@ -27,6 +27,12 @@
 #include "std_msgs/String.h"
 #include "std_msgs/Bool.h"
 
+// These were ripped off of the MQP repo
+#include <tf/tf.h>
+#include <tf/transform_listener.h>
+#include <math.h>
+#include <tf/transform_datatypes.h>
+
 
 // "manipulator" is for the abb arm.
 static const std::string PLANNING_GROUP = "manipulator";
@@ -46,7 +52,13 @@ bool dowehavenewpose = false;
 // Is the arm done moving?
 std_msgs::Bool armdonemoving;
 
+// I ripped these off of th eMQP repository
 std::string base_frame = "/base_link";
+//Location variables set at launch
+float roll, pitch, yaw;
+float x, y, z;
+
+
 
 // This is the callback function for receiving the pose we want to go to
 void poseCallback(const geometry_msgs::Pose& msg)
@@ -56,11 +68,16 @@ void poseCallback(const geometry_msgs::Pose& msg)
   mypose.position.x=msg.position.x;
   mypose.position.y=msg.position.y;
   mypose.position.z=msg.position.z;
-  // Now we get the orientation info.
-  mypose.orientation.x=msg.orientation.x;
-  mypose.orientation.y=msg.orientation.y;
-  mypose.orientation.z=msg.orientation.z;
-  mypose.orientation.w=msg.orientation.w;
+  // Now we get the orientation info. For now, we ignore the wanted orientation from the pose publisher.
+  // quaternionTFToMsg(q_rot,mypose.orientation);
+
+  // The line above only happens once in main()
+
+
+  // mypose.orientation.x=msg.orientation.x;
+  // mypose.orientation.y=msg.orientation.y;
+  // mypose.orientation.z=msg.orientation.z;
+  // mypose.orientation.w=msg.orientation.w;
   // Now I need to set the boolean flag to say that we have received a new pose to go to.
   dowehavenewpose = true;
 }
@@ -84,7 +101,9 @@ void poseCallback(const geometry_msgs::Pose& msg)
 // The main running code.
 int main(int argc, char** argv)
 {
-  ros::init(argc, argv, "move_group_interface_tutorial");
+  // This MUST BE CALLED FIRST!!
+  ros::init(argc, argv, "abb_mover");
+
   ros::NodeHandle node_handle;
   // I forgot to register the subscriber
   ros::Subscriber sub = node_handle.subscribe("/pixy_traj", 2, poseCallback); // the second argument is the queue size
@@ -146,6 +165,32 @@ int main(int argc, char** argv)
     program wait.
   */
 
+  // These next few lines are ripped from the mqp team
+  // Get the ROS params and store them in this file.
+  node_handle.getParam("home_pose/roll",roll);
+	node_handle.getParam("home_pose/pitch",pitch);
+  node_handle.getParam("home_pose/yaw",yaw);
+  node_handle.getParam("home_pose/x_pos",x);
+	node_handle.getParam("home_pose/y_pos",y);
+  node_handle.getParam("home_pose/z_pos",z);
+  // roll = pitch = roll = 0;
+  // x = y = z = 1;
+  // Convert to radians
+  roll=roll*(M_PI/180);
+  pitch=pitch*(M_PI/180);
+  yaw=yaw*(M_PI/180);
+  tf::Quaternion q_rot;
+  // tf::TransformListener listener;
+  // create quarternion
+  q_rot = tf::createQuaternionFromRPY(roll, pitch, yaw);
+  // Now we set the end of arm tooling orientation.
+  // quaternionTFToMsg(q_rot,poseEOAT.orientation);
+  quaternionTFToMsg(q_rot,mypose.orientation);
+
+
+  // The part I ripped above was solely to orient the eoat in the same orientation for all x,y,z.
+
+  // Back to my own code
   // Initialize the is moving boolean
   armdonemoving.data=false;
   pub.publish(armdonemoving);
