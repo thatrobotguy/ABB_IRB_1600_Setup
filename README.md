@@ -69,7 +69,7 @@ Now you need to select the ethernet option in the next menu like so:
 
 ![Image of network options](https://github.com/thatrobotguy/WPI_ABB_IRB_1600_Setup/blob/master/networkoptions.png)
 
-Then you click `edit`. Now, go to the IPv4 settings tab and set your machine IP like this:
+Then you click `edit`. Now, go to the IPv4 settings tab and click `add`. Set your machine IP like this:
 
 ![Image of ipv4 settings](https://github.com/thatrobotguy/WPI_ABB_IRB_1600_Setup/blob/master/ipv4_settings.png)
 
