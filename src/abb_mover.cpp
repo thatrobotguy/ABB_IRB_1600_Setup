@@ -46,8 +46,11 @@ bool isgoodplan = false;
 // This is a printing counter
 int printcounter = 0;
 
-// This is where we store the pose we want to go to.
-geometry_msgs::Pose mypose;
+// This is where we store the pose we want to go to. THIS IS THE FINAL POSE TO SEND TO THE ROBOT.
+geometry_msgs::Pose poseEOAT;
+
+// This is the home pose
+geometry_msgs::Pose homepose;
 
 // This is the boolean flag that says if we have a new pose or not.
 bool dowehavenewpose = false;
@@ -61,28 +64,33 @@ std::string base_frame = "/base_link";
 float roll, pitch, yaw;
 float x, y, z;
 tf::Quaternion q_rot;
-
+tf::StampedTransform j6_trans;
+tf::Transform tool_trans;
+tf::Transform j6_to_base;
 
 // This is the callback function for receiving the pose we want to go to
 void poseCallback(const geometry_msgs::Pose& msg)
 {
-  ROS_INFO("Running callback function.");
-  // Now we get the position info
-  mypose.position.x=msg.position.x;
-  mypose.position.y=msg.position.y;
-  mypose.position.z=msg.position.z;
-  // Now we get the orientation info. For now, we ignore the wanted orientation from the pose publisher.
-  // quaternionTFToMsg(q_rot,mypose.orientation);
+  // We only want to save the pose if we do not already have a pose to go to.
+  if (dowehavenewpose == false)
+  {
+    ROS_INFO("Running callback function.");
+    // Now we get the position info
+    poseEOAT.position.x=msg.position.x;
+    poseEOAT.position.y=msg.position.y;
+    poseEOAT.position.z=msg.position.z;
+    // Now we get the orientation info. For now, we ignore the wanted orientation from the pose publisher.
+    // quaternionTFToMsg(q_rot,poseEOAT.orientation);
 
-  // The line above only happens once in main()
+    // The line above only happens once in main()
 
-
-  // mypose.orientation.x=msg.orientation.x;
-  // mypose.orientation.y=msg.orientation.y;
-  // mypose.orientation.z=msg.orientation.z;
-  // mypose.orientation.w=msg.orientation.w;
-  // Now I need to set the boolean flag to say that we have received a new pose to go to.
-  dowehavenewpose = true;
+    // poseEOAT.orientation.x=msg.orientation.x;
+    // poseEOAT.orientation.y=msg.orientation.y;
+    // poseEOAT.orientation.z=msg.orientation.z;
+    // poseEOAT.orientation.w=msg.orientation.w;
+    // Now I need to set the boolean flag to say that we have received a new pose to go to.
+    dowehavenewpose = true;
+  }
 }
 
 // roscore
@@ -91,7 +99,7 @@ void poseCallback(const geometry_msgs::Pose& msg)
 // rosrun moveit_tutorials pose_generator.py 
 
 // This is the old python script
-// rosrun moveit_tutorials andrew_abb_move.py 
+// rosrun moveit_tutorials andrew_abb_move.py   
 
 /*
   I have to give credit to the MQP guys because I am ripping some of the logic straight from there repository
@@ -116,6 +124,9 @@ int main(int argc, char** argv)
   // Here we start a background thread to handle spinning.
   ros::AsyncSpinner spinner(1);
   spinner.start();
+
+  // In order to get the end effector transform, we need to listen to transform frames.
+  tf::TransformListener listener;
 
   // The :move_group_interface:`MoveGroup` class can be easily
   // setup using just the name of the planning group you would like to control and plan for.
@@ -166,6 +177,16 @@ int main(int argc, char** argv)
     program wait.
   */
 
+
+
+
+
+
+
+
+
+
+
   // These next few lines are ripped from the mqp team
   // Get the ROS params and store them in this file.
   node_handle.getParam("home_pose/roll",roll);
@@ -174,23 +195,44 @@ int main(int argc, char** argv)
   node_handle.getParam("home_pose/x_pos",x);
 	node_handle.getParam("home_pose/y_pos",y);
   node_handle.getParam("home_pose/z_pos",z);
-  // roll = pitch = roll = 0;
-  // x = y = z = 1;
   // Convert to radians
   roll=roll*(M_PI/180);
   pitch=pitch*(M_PI/180);
   yaw=yaw*(M_PI/180);
-  // In order to get the end effector transform, we need to listen to transform frames.
-  tf::TransformListener listener;
   // create quarternion
   q_rot = tf::createQuaternionFromRPY(roll, pitch, yaw);
-  
   // Now we set the end of arm tooling orientation.
   // quaternionTFToMsg(q_rot,poseEOAT.orientation);
-  quaternionTFToMsg(q_rot,mypose.orientation);
-  std::cout << "This is the quarternion for the end effector: \n" << mypose.orientation << std::endl;
+  quaternionTFToMsg(q_rot,poseEOAT.orientation);
+  // Now we set the orientation of the home pose to the same thing because we know it is valid.
+  quaternionTFToMsg(q_rot,homepose.orientation);
+  std::cout << "This is the quarternion for the HOME POSITION end effector: \n" << homepose.orientation << std::endl;
+  // Now we fill in the position
+  poseEOAT.position.x=x;
+  poseEOAT.position.y=y;
+  poseEOAT.position.z=z;
+  // Now we place the wanted pose into a transform.
+  tf::poseMsgToTF(poseEOAT, tool_trans);
+  // Get the transform between the base link and the end effector-mounted link
+  listener.waitForTransform("/base_link","/link_6",ros::Time(0), ros::Duration(4.0));
+  listener.lookupTransform("/base_link", "/link_6", ros::Time(0), j6_trans);
+  // Bring the transform with respect to the base
+  j6_to_base = j6_trans * tool_trans;
+  // Now we set he transform message to the pose
+  tf::poseTFToMsg(j6_to_base, poseEOAT);
+  // Now I want to see what the orientation is
+  std::cout << "This is the quarternion for the end effector: \n" << poseEOAT.orientation << std::endl;
+  // The part I ripped above was solely to orient the eoat in some hardcoded x,y,z
 
-  // The part I ripped above was solely to orient the eoat in the same orientation for all x,y,z.
+
+
+
+
+
+
+
+
+
 
   // Back to my own code
   // Initialize the is moving boolean
@@ -210,7 +252,7 @@ int main(int argc, char** argv)
     {
       // This means we need to do the visual updating to get the arm to move.
       // First we set the target
-      move_group.setPoseTarget(mypose);
+      move_group.setPoseTarget(poseEOAT);
       // Now, we call the planner to compute the plan and visualize it.
       // Note that we are just planning, not asking move_group
       // to actually move the robot.
@@ -220,7 +262,7 @@ int main(int argc, char** argv)
       // Get status messages
       ROS_INFO_NAMED("tutorial", "Visualizing plan 1 (pose goal) %s", isgoodplan ? "" : "FAILED");
       ROS_INFO_NAMED("tutorial", "Visualizing plan 1 as trajectory line");
-      visual_tools.publishAxisLabeled(mypose, "pose1");
+      visual_tools.publishAxisLabeled(poseEOAT, "pose1");
       visual_tools.publishText(text_pose, "Pose Goal", rvt::WHITE, rvt::XLARGE);
       visual_tools.publishTrajectoryLine(my_plan.trajectory_, joint_model_group);
       visual_tools.trigger();

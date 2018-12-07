@@ -27,24 +27,26 @@ class TestABBPoseGeneration:
     # We only use this when we want to home the robot.
     self.homepose=Pose()
     self.homepose.position.x=float(910.15 / 1000.0)
-    #self.homepose.position.y=float(20.54 / 1000.0)
     self.homepose.position.y=float(0.0)
     self.homepose.position.z=float(1194.48 / 1000.0)
-    self.homepose.orientation.w=float(1.0)
-
     # We are going to create an array containting the poses we will navigate to.
     self.squareposes=[]
 
     """
     ASSUME UNITS ARE IN METERS!!!!
+
+    Positive X means that it moves away from the TA office/lounge
+    Positive y means that it moves towards WHRL Labs
+    Positive z means that it moves towards heaven
+
     """
 
     # Bottom left point in square
     pose_goal = geometry_msgs.msg.Pose()
     pose_goal.orientation.w = 1.0
-    pose_goal.position.x = self.homepose.position.x#-float(100.0 / 1000.0)
-    pose_goal.position.y = self.homepose.position.y-float(100.0 / 1000.0)
-    pose_goal.position.z = self.homepose.position.z #-float(100.0 / 1000.0)
+    pose_goal.position.x = -0.5 # - float(100.0 / 1000.0)
+    pose_goal.position.y = -0.5 # - float(100.0 / 1000.0)
+    pose_goal.position.z = 0.5 # - float(100.0 / 1000.0)
 
     # first, we append the home position.
     self.squareposes.append(copy.deepcopy(self.homepose))
