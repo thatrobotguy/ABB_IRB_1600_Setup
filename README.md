@@ -98,6 +98,11 @@ rosmasterbegin='http://'
 export ROS_MASTER_URI=$rosmasterbegin${machine_ip[0]}$rosport
 # This is the hostname of the current machine.
 export ROS_HOSTNAME=${machine_ip[0]}
+# This is the ROS distribution that we are running
+export ROS_DISTRO=kinetic
+# Sometimes you need to set ROS_IP for transforms and the parameter server
+# https://answers.ros.org/question/163556/how-to-solve-couldnt-find-an-af_inet-address-for-problem/
+export ROS_IP=${machine_ip[0]}
 ```
 Supposedly you do not need to set ROS_MASTER_URI or ROS_HOSTNAME, but I seem to get more stable results setting these environment variables, I am telling you to do the same.
 If you do not want to use `hostname -I`, you can run `ifconfig` and look for `inet addr: xxx.xxx.xxx.xxx` to set the address.
