@@ -310,30 +310,11 @@ https://answers.ros.org/question/196586/how-do-i-disable-execution_duration_moni
 <include file="$(find abb_irb1600_6_12_moveit_config)/launch/$(arg moveit_controller_manager)_moveit_controller_manager.launch.xml" />
 </launch>
 ```
-Now that I have the ROS Node working, we have to now look at the robot arm itself and the teach pendant.
-The first order of business is to boot the robot arm into `System2_ROS`. You need to select 
+Now that I have the ROS Node working, we have to now look at the robot arm itself and the teach pendant. The first order of business is to boot the robot arm into `System2_ROS`. Assuming you are currently booted into `System2`, you will need to switch OSs. Click on the ABB logo in the upper left hand corner. Then click `Control Panel`. Then look down low at the last option in the list above the boot options. The option you want to click is `installed systems`. You then need to select the `System2_ROS` option and then look down and to the right and select `Activate`. Select `Yes` to start the reboot. The pendant will then reboot to the ROS arm configuration. Once that is done, you need to click on the “ABB” in the upper left and then select the `Program editor` option. Then you select `Debug` on the bottom and then select `PP to main` and then you should be set to go to…
 
-`Control Panel`
+STOP! NEVER FORGET THIS LAST STEP!
 
-and then look down low at the last option in the list above the boot options. 
-
-The option is `installed systems`.
-
-or something like that. I am just forgetting at the moment.
-
-You then need to select the System2_ROS option and then look down and to the right and select
-
-`Activate`
-
-and then accept whatever the prompt complains about. The pendant will then reboot to the ROS arm configuration. Once that is done, you need to click on the “ABB” in the upper left and then select
-
-`Program editor`
-
-option. Then you select “Debug” on the bottom and then select “PP to main” and then you should be set to go…
-
-NOPE! NEVER FORGET THIS LAST STEP!
-
-Press play on the teach pendant. Only then can you execute trajectories.
+Press `play` on the teach pendant. ONLY THEN can you execute trajectories.
 
 
 ONE MORE STEP BEFORE ROS WILL WORK
