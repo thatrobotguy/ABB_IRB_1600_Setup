@@ -183,13 +183,14 @@ int main(int argc, char** argv)
       pub.publish(armdonemoving);
       // Now we do the move - Note that this is a blocking function. We will have to fix that later.
       move_group.move();
+      // This is where we reset the current state.
+      move_group.setStartStateToCurrentState();
       // Say that we do not have a new pose
-      dowehavenewpose  = false;
+      dowehavenewpose = false;
       // Now we say the arm is not moving
       armdonemoving.data=false;
       pub.publish(armdonemoving);
-      // This is where we reset the current state.
-      move_group.setStartStateToCurrentState();
+      // I am not 100% sure, but I think that the order of this "I'm done publisher" and actually moving DOES MATTER
     } else {
       // We do not have a new pose, so we do not want to move the robot.
       if (printcounter==0)
@@ -198,6 +199,8 @@ int main(int argc, char** argv)
       } else { }
     }
   }
+  // We use this because of background threads.
+  // https://wiki.ros.org/roscpp/Overview/Callbacks%20and%20Spinning#Multi-threaded_Spinning
   ros::waitForShutdown();
   return 0;
 }
