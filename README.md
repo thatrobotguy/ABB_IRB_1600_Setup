@@ -275,7 +275,7 @@ robot_interface_download_irb1600.launch robot_ip:=<value>
 </launch>
 ```
 In the upper launch file, I turned the couple_J_2_3 off as well as set the default IP address. Other than that, everything else is left alone.
-I did make one other change to the launch files. This one should not be _necessary_, but I have included it here so that I am not missing anything as I happened to make these changes in the process. I explain in the final notes section why this file matters. This is the .xml file I edited: `trajectory_execution.launch.xml`. (It is in the same directory as the upper level launch file, If I am not mistaken.) I got the idea to edit it [from this post.](https://answers.ros.org/question/196586/how-do-i-disable-execution_duration_monitoring/)
+I did make one other change to the launch files. This one should not be _necessary_, but I have included it here so that I am not missing anything as I happened to make these changes in the process. This launch file only matters when you are running your code on the real robot as opposed to the simulated robot. I talk about it more in the final notes section. This is the .xml file I edited: `trajectory_execution.launch.xml`. (It is in the same directory as the upper level launch file, If I am not mistaken.) I got the idea to edit it [from this post.](https://answers.ros.org/question/196586/how-do-i-disable-execution_duration_monitoring/)
 
 Here is what the file looks like for me:
 ```
