@@ -362,7 +362,7 @@ But if you are in manual mode it is easier to just turn of this safety. [This li
 You may also encounter [this issue](https://github.com/qboticslabs/mastering_ros/issues/24) while trying to drive the robot. Also, if you are wanting to listen to transforms, you need to create a listener AFTER you call `initnode(argc, argv, "mynodename")`. This means that you cannot create a global variable listener outside of `main()` or `rosrun mypackage mynodewithtflisteners` will not work.
 
 #### More good links:
-
+```
 https://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/move_group_interface/move_group_interface_tutorial.html
 https://docs.ros.org/kinetic/api/moveit_tutorials/html/index.html
 https://wiki.ros.org/ROS/EnvironmentVariables
@@ -370,5 +370,6 @@ https://industrial-training-master.readthedocs.io/en/latest/_source/session4/Mot
 https://industrial-training-master.readthedocs.io/en/latest/_source/session2/Launch-Files.html
 https://industrial-training-master.readthedocs.io/en/latest/_source/session2/Actions.html
 https://industrial-training-master.readthedocs.io/en/latest/_source/session3/Build-a-Moveit!-Package.html
-
+http://wiki.ros.org/abb/Tutorials
+```
 ## Documentation written by thatrobotguy
