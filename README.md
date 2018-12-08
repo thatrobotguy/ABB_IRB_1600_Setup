@@ -2,7 +2,7 @@
 This is the repository that explains how to set up the ABB IRB 1600 robot arm at WPI's Washburn Labs with ROS.
 
 ## Prerequisites
-This guide assumes many things about the people reading it. This guide is not for those kinds of people without any experience with ROS.
+This guide assumes many things about the people reading it. This guide is not for those kinds of people without any experience with ROS. This guide refers to other guides so this tutorial is not complete in the traditional sense. I have to point you to the other links because they may get updated sooner then this document. Also, I do not maintain those packages, so I am not the one with all the answers. This document is simply how I got my machine working, but with much more clarity than scratch work and other [MQP git repositories](https://www.wpi.edu/academics/undergraduate/major-qualifying-project).
 
 #### Things to have set up before starting on this guide
 1. A working installation of Ubuntu 1604 on any computer
