@@ -371,5 +371,6 @@ https://industrial-training-master.readthedocs.io/en/latest/_source/session2/Lau
 https://industrial-training-master.readthedocs.io/en/latest/_source/session2/Actions.html
 https://industrial-training-master.readthedocs.io/en/latest/_source/session3/Build-a-Moveit!-Package.html
 http://wiki.ros.org/abb/Tutorials
+https://erlerobotics.gitbooks.io/erlerobot/en/ros/tutorials/rosnavigating.html
 ```
 ## Documentation written by thatrobotguy
