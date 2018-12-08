@@ -275,10 +275,7 @@ robot_interface_download_irb1600.launch robot_ip:=<value>
 </launch>
 ```
 In the upper launch file, I turned the couple_J_2_3 off as well as set the default IP address. Other than that, everything else is left alone.
-I did make one other change to the launch files. This one should NOT be necessary, nor is it recommended, but I have included it here so that I am not missing anything as I happened to make these changes in the process. I just have not gotten to changing them back to the original version on my ubuntu laptop. I edited this .xml file: `trajectory_execution.launch.xml`. (It is in the same directory as the upper level launch file, If I am not mistaken.)
-
-I got the idea to edit it [from this post.](https://answers.ros.org/question/196586/how-do-i-disable-execution_duration_monitoring/
-)
+I did make one other change to the launch files. This one should not be _necessary_, but I have included it here so that I am not missing anything as I happened to make these changes in the process. I explain in the final notes section why this file matters. This is the .xml file I edited: `trajectory_execution.launch.xml`. (It is in the same directory as the upper level launch file, If I am not mistaken.) I got the idea to edit it [from this post.](https://answers.ros.org/question/196586/how-do-i-disable-execution_duration_monitoring/)
 
 Here is what the file looks like for me:
 ```
@@ -318,7 +315,7 @@ Press `play` on the teach pendant. ONLY THEN can you execute trajectories.
 
 BUT WAIT! THE TEACH PENDANT ERRORS OUT!
 
-You must be pressing the motors enable grip down just enough to enable the motors before your program will run, even if you are controlling everthing with ROS.
+You must be pressing the motors enable grip down just enough to enable the motors before your program will run, even if you are controlling everthing with ROS. If you forget to do so, the teach pendant will throw errors.
 
 ## How to start up the ABB IRB 1600 ROS Node
 
@@ -333,7 +330,7 @@ roslaunch abb_irb1600_6_12_moveit_config moveit_planning_execution.launch robot_
 
 ## Final notes
 
-I find that the ROS stuff is more stable if you start the robot “pp to main” first, then run the launch file. You also do not need to start roscore separately as the launch file will do that for you. If you run into issues with roscore not working, you probably need to make sure you set the environment variables properly.
+I find that the ROS stuff is more stable if you start the robot `pp to main` first, then run the launch file. You also do not need to start roscore separately as the launch file will do that for you. If you run into issues with roscore not working, you probably need to make sure you set the environment variables properly.
 
 I believe that this is everything required to get the arm to work. You should call the uppermost launch file described earlier in their own custom launch file in their own custom ROS package so that they do not have any of the ROS-Industrial packages in their personal git repositories. The MQP team made that mistake already.
 
