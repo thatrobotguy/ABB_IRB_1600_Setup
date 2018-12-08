@@ -108,6 +108,8 @@ Supposedly you do not need to set ROS_MASTER_URI or ROS_HOSTNAME, but I seem to 
 If you do not want to use `hostname -I`, you can run `ifconfig` and look for `inet addr: xxx.xxx.xxx.xxx` to set the address.
 Make sure to run `source ~/.bashrc` in all open terminals once that is all done. If you want an official explanation to what these variables are doing, [check out this link.](http://wiki.ros.org/ROS/EnvironmentVariables)
 
+This is the [main link](http://wiki.ros.org/Industrial/Install) to install `ROS-Industrial`.
+
 You now need to git clone [this repository](https://github.com/ros-industrial/industrial_core) for the core functionalities of ros-industrial.
 
 ## MoveIt! Installation
