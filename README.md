@@ -143,16 +143,14 @@ that will put you on the correct branch.
 You now need the abb robot driver. This is in the non-experimental abb repository for ros industrial.
 This is the [link you need](https://github.com/ros-industrial/abb.git) to git clone.
 
-You may not have to git clone `abb` because building from source automatically git clone the necessary packages to your catkin workspace.
-
-NOW that you have downloaded all of those repositories into your workspace, you can finally run `catkin_make` in
+Now that you have downloaded all of those repositories into your workspace, you can finally run `catkin_make` in
 `/home/$USER/catkin_ws/`.
 
-I should note that you should NOT `catkin_make` until everything is git cloned, installed, or built.
+I should note that you should NOT `catkin_make` until everything is git cloned, except for after using `wstool` to get the `MoveIt!` repositories when building from source.
 
 ## ABB Package Modifications
 
-Once you have gotten the installations squared away, we will have to do some manual modifications of launch files before you connect the robot to ROS.
+Once you have gotten the `ROS-Industrial` and `MoveIt!` installations squared away, we will have to do some manual modifications of launch files before you connect the robot to ROS.
 
 In the ros package `abb_experimental` there is a subpackage called `abb_irb1600_6_12_moveit_config` with this launch file:
 ```
