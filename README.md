@@ -106,7 +106,7 @@ export ROS_IP=${machine_ip[0]}
 ```
 Supposedly you do not need to set ROS_MASTER_URI or ROS_HOSTNAME, but I seem to get more stable results setting these environment variables, I am telling you to do the same.
 If you do not want to use `hostname -I`, you can run `ifconfig` and look for `inet addr: xxx.xxx.xxx.xxx` to set the address.
-Make sure to run `source ~/.bashrc` in all open terminals once that is all done.
+Make sure to run `source ~/.bashrc` in all open terminals once that is all done. If you want an official explanation to what these variables are doing, [check out this link.](http://wiki.ros.org/ROS/EnvironmentVariables)
 
 # MoveIt! Installation
 
