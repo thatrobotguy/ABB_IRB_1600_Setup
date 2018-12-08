@@ -15,7 +15,7 @@ This guide assumes many things about the people reading it. This guide is not fo
 8. Your favorite text editor
 
 ### In the beginning...
-The first thing you will need to do is set up a static ip address on your ethernet nic. In order to network with the robot, you will be connecting your device to an ethernet port on a network switch. At the time of writing of this document, this is an 8 port switch sitting on top of the robot controller. This switch is expected to be upgraded soon, so ask the prof if you cannot find it. This documentation is mainly made up of quick notes and mild scratch work, but I think it gets the idea across. I should thank the MQP team for pointing me in the right direction while I created this list of steps. If anybody feels there are changes that need to be made, do mention it.  I have been making updates so that this document looks as clean as possible. I also should mention that, since some components may be out of order, you should read the document in its entirety before embarking on the installation of ROS Industrial and MoveIt!. I should also mention that, before blindly doing the steps in all of these tutorials, you need to read what you are doing. For example, multiple tutorials show different commands to modify your `~/.bashrc` flie. I already provide most of the environment variables that work, therefore, you should only add environment variables when they have been __explicitly__ mentioned __outside__ of this tutorial `README.md` file.
+The first thing you will need to do is set up a static ip address on your ethernet nic. In order to network with the robot, you will be connecting your device to an ethernet port on a network switch. At the time of writing of this document, this is an 8 port switch sitting on top of the robot controller. This switch is expected to be upgraded soon, so ask the prof if you cannot find it. This documentation is mainly made up of quick notes and mild scratch work, but I think it gets the idea across. I should thank the MQP team for pointing me in the right direction for some of these links. If anybody feels there are changes that need to be made, make a pull request or create a github bug thing or whatever it is called. Either I or somebody else may have seen the bug before. I have been making frequent updates so that this document looks as clean as possible. I also should mention that I have tried to list the steps in order, but some steps _can_ be done out of order, and some steps may be in the wrong order, so you should read this document in its entirety before embarking on the installation of ROS Industrial and MoveIt!. I should also mention that, before blindly doing the steps in all of these tutorials, you need to read the steps I ask you to do before you do them. For example, multiple tutorials show different commands that have to do with modifying your `~/.bashrc` flie. I already provide most of the environment variables that are necessary to make ROS work, therefore you should only add environment variables when they have been __explicitly__ mentioned __outside__ of this tutorial `README.md` file and __not__ explicitly mentioned __here__. I should also mention that, for the networking portion of this tutorial, I am assuming that you are on WPI internet. If not, setting the static IP may require a different process. At home, I have to set the static IP in the router, not my desktop. Even then, I can only use simulation in this case. You will have to think about what you are doing before you go and do what these other links say to do.
 
 ## Static IP configuring
 In order to set a static ip address, you will first have to know some stuff.
@@ -75,7 +75,7 @@ Then you click `edit`. Now, go to the IPv4 settings tab and set the `Method` to 
 
 Now once these are set you will want to click `save` and then restart your machine to make sure all your changes are written properly.
 
-# ROS Setup
+## ROS Setup
 
 First, you will need to make sure you have `ros-kinetic-desktop-full` installed on your ubuntu 1604 linux machine. My ROS catkin workspace is located here:
 ```
@@ -110,7 +110,7 @@ Make sure to run `source ~/.bashrc` in all open terminals once that is all done.
 
 You now need to git clone [this repository](https://github.com/ros-industrial/industrial_core) for the core functionalities of ros-industrial.
 
-# MoveIt! Installation
+## MoveIt! Installation
 
 Next, you will want to go to the [link provided here](http://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/trac_ik/trac_ik_tutorial.html) and run the `sudo apt-get install xxxxxxx` commands.
 
@@ -121,7 +121,7 @@ You will also have to apt install this thing:
 Now you need to install MoveIt! You can go [here to install](http://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/getting_started/getting_started.html) the regular way or you can go [here to install](http://moveit.ros.org/install/source/) from source. I expect that, when you get to the second page from the first link, you cannot go further. This is because you need to do the advanced setup for MoveIt (build from source) since you still do not have all of the necessary packages set up. I am almost certain you will have this problem. As a result, you will have to follow the second link anyways. I believe the MQP team said they had to build from source anyways. When you build from source, make sure that you go to the bottom of the page and use the `build from source` instructions that uses the `ROS_DISTRO` environment variable. Also, where the MoveIt advanced install instructions say to do `catkin build`, you really want to do `catkin_make`. As a reminder, this is the [link to the main website](https://moveit.ros.org/
 ) for the MoveIt libraries.
 
-# ABB Specific Installation
+## ABB Specific Installation
 
 Once you have built the moveit libraries from source, we need to get the ABB specific packages.
 
@@ -150,7 +150,7 @@ NOW that you have downloaded all of those repositories into your workspace, you 
 
 I should note that you should NOT `catkin_make` until everything is git cloned, installed, or built.
 
-# Package Modifications
+## ABB Package Modifications
 
 Once you have gotten the installations squared away, we will have to do some manual modifications of launch files before you connect the robot to ROS.
 
@@ -319,7 +319,7 @@ BUT WAIT! THE TEACH PENDANT ERRORS OUT!
 
 You must be pressing the motors enable grip down just enough to enable the motors before your program will run, even if you are controlling everthing with ROS. If you forget to do so, the teach pendant will throw errors.
 
-## How to start up the ABB IRB 1600 ROS Node
+## How to start up the ABB IRB 1600 with ROS
 
 Now that you have installed everything and modified those 2 xml/launch files, you can now run this command to start the simulated robot up with ROS:
 ```
@@ -329,12 +329,15 @@ Or start the real robot with ROS:
 ```
 roslaunch abb_irb1600_6_12_moveit_config moveit_planning_execution.launch robot_ip:=192.168.100.100 sim:=false
 ```
+The only difference being the `sim:=true/false` at the end.
 
 ## Final notes
 
 I find that the ROS stuff is more stable if you start the robot `pp to main` first, then run the launch file. You also do not need to start roscore separately as the launch file will do that for you. If you run into issues with roscore not working, you probably need to make sure you set the environment variables properly.
 
 I believe that this is everything required to get the arm to work. You should call the uppermost launch file described earlier in their own custom launch file in their own custom ROS package so that they do not have any of the ROS-Industrial packages in their personal git repositories. The MQP team made that mistake already.
+
+## Possible Errors
 
 Sometimes you may get this error while running in manual mode:
 ```
@@ -358,7 +361,7 @@ But if you are in manual mode it is easier to just turn of this safety. [This li
 
 You may also encounter [this issue](https://github.com/qboticslabs/mastering_ros/issues/24) while trying to drive the robot. Also, if you are wanting to listen to transforms, you need to create a listener AFTER you call `initnode(argc, argv, "mynodename")`. This means that you cannot create a global variable listener outside of `main()` or `rosrun mypackage mynodewithtflisteners` will not work.
 
-More good links:
+#### More good links:
 
 https://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/move_group_interface/move_group_interface_tutorial.html
 https://docs.ros.org/kinetic/api/moveit_tutorials/html/index.html
@@ -368,4 +371,4 @@ https://industrial-training-master.readthedocs.io/en/latest/_source/session2/Lau
 https://industrial-training-master.readthedocs.io/en/latest/_source/session2/Actions.html
 https://industrial-training-master.readthedocs.io/en/latest/_source/session3/Build-a-Moveit!-Package.html
 
-### Documentation written by thatrobotguy
+## Documentation written by thatrobotguy
