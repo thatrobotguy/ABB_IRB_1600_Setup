@@ -56,7 +56,7 @@ geometry_msgs::Pose homepose;
 bool dowehavenewpose = false;
 
 // Is the arm done moving?
-std_msgs::Bool armdonemoving;
+std_msgs::Bool armdoingmove;
 
 // I ripped these off of th eMQP repository
 std::string base_frame = "/base_link";
@@ -236,8 +236,8 @@ int main(int argc, char** argv)
 
   // Back to my own code
   // Initialize the is moving boolean
-  armdonemoving.data=false;
-  pub.publish(armdonemoving);
+  armdoingmove.data=false;
+  pub.publish(armdoingmove);
 
   // Just in case the base link is NOT the home position, it SHOULD BE
   move_group.setPoseReferenceFrame(base_frame);
@@ -268,8 +268,8 @@ int main(int argc, char** argv)
       visual_tools.trigger();
       // visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo");
       // Publish that we are busy doing a trajectory
-      armdonemoving.data=true;
-      pub.publish(armdonemoving);
+      armdoingmove.data=true;
+      pub.publish(armdoingmove);
       // Now we do the move - Note that this is a blocking function. We will have to fix that later.
       move_group.move();
       // This is where we reset the current state.
@@ -277,8 +277,8 @@ int main(int argc, char** argv)
       // Say that we do not have a new pose
       dowehavenewpose = false;
       // Now we say the arm is not moving
-      armdonemoving.data=false;
-      pub.publish(armdonemoving);
+      armdoingmove.data=false;
+      pub.publish(armdoingmove);
       // I am not 100% sure, but I think that the order of this "I'm done publisher" and actually moving DOES MATTER
     } else {
       // We do not have a new pose, so we do not want to move the robot.
