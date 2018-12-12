@@ -162,7 +162,7 @@ Now that you have downloaded all of those repositories into your workspace, you 
 
 I should note that you should NOT `catkin_make` until everything is git cloned, except for after using `wstool` to get the `MoveIt!` repositories when building from source.
 
-### Now that you have git cloned everything, you now can skip to the "How to start up the ABB IRB 1600 with ROS" section
+### Now that you have git cloned everything, you now can skip the "ABB Package Modifications" steps and go to the "How to start up the ABB IRB 1600 with ROS" steps
 
 ## ABB Package Modifications
 
@@ -276,7 +276,7 @@ robot_interface_download_irb1600.launch robot_ip:=<value>
 
 <launch>
 <arg name="robot_ip" doc="IP of the controller" />
-<!-- Andrew moved this line into a comment.
+<!-- tharobotguy moved this line into a comment.
 <arg name="J23_coupled" default="true" doc="If true, compensate for J2-J3 parallel linkage" />
 -->
 
@@ -303,7 +303,7 @@ Here is what the file looks like for me:
 <arg name="moveit_manage_controllers" default="true"/>
 <param name="moveit_manage_controllers" value="$(arg moveit_manage_controllers)"/>
 
-<!-- Andrew added this line from here:
+<!-- thatrobotguy added this line from here:
 https://answers.ros.org/question/196586/how-do-i-disable-execution_duration_monitoring/
 
 <param name="trajectory_execution/execution_duration_monitoring" value="true" />
@@ -312,11 +312,11 @@ https://answers.ros.org/question/196586/how-do-i-disable-execution_duration_moni
 <!-- When determining the expected duration of a trajectory, this multiplicative factor is applied to get the allowed duration of execution -->
 <param name="trajectory_execution/allowed_execution_duration_scaling" value="1.2"/> <!-- default 1.2 -->
 <!-- Allow more than the expected execution time before triggering a trajectory cancel (applied after scaling) -->
-<!-- ANdrew played with this too.-->
+<!-- thatrobotguy played with this too.-->
 <param name="trajectory_execution/allowed_goal_duration_margin" value="3.5"/> <!-- default 0.5 -->
 
 <!-- Allowed joint-value tolerance for validation that trajectory's first point matches current robot state -->
-<!-- Andrew set the default from 0.01 to 0.0-->
+<!-- thatrobotguy set the default from 0.01 to 0.0-->
 <param name="trajectory_execution/allowed_start_tolerance" value="0.1"/> <!-- default 0.01 -->
 <!-- Load the robot specific controller manager; this sets the moveit_controller_manager ROS parameter -->
 <arg name="moveit_controller_manager" default="abb_irb1600_6_12" />
