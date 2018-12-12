@@ -147,13 +147,22 @@ Run `git branch -a` to figure out what branch you are currenly on. If you are on
 
 that will put you on the correct branch.
 
+# WAIT! 
+
+These are the old instructions"
+```
 You now need the abb robot driver. This is in the non-experimental abb repository for ros industrial.
 This is the [link you need](https://github.com/ros-industrial/abb.git) to git clone.
+```
+
+You need to git clone my fork instead [which is linked](https://github.com/thatrobotguy/abb_experimental) here.
 
 Now that you have downloaded all of those repositories into your workspace, you can finally run `catkin_make` in
 `/home/$USER/catkin_ws/`.
 
 I should note that you should NOT `catkin_make` until everything is git cloned, except for after using `wstool` to get the `MoveIt!` repositories when building from source.
+
+### Now that you have git cloned everything, you now can skip to the "How to start up the ABB IRB 1600 with ROS" section
 
 ## ABB Package Modifications
 
