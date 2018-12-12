@@ -35,7 +35,7 @@ class TestABBPoseGeneration:
     pose_goal = geometry_msgs.msg.Pose()
     #pose_goal.orientation.w = 1.0
     pose_goal.position.x = -0.35 # - float(100.0 / 1000.0)
-    pose_goal.position.y = -1.45 # THis is tha actual maximum
+    pose_goal.position.y = -1.0 # THis is tha actual maximum
     pose_goal.position.z = 0.7
 
     """
@@ -72,7 +72,7 @@ class TestABBPoseGeneration:
     # 0.292+0.3556 along the -y extended from the eoat
     # -0.015875 meters the positive x from the eoat
     # +5/8-3 = -0.060325 meters in the z from the eoat
-    """pose_goal.position.x = 0.35 # - float(100.0 / 1000.0)
+    """pose_goal.position.x = 0.15 # - float(100.0 / 1000.0)
     pose_goal.position.y = -1.45 # THis is tha actual maximum
     pose_goal.position.z = 0.7"""
     #
@@ -80,9 +80,9 @@ class TestABBPoseGeneration:
     #
     # top  - (278, 58) - the first number is left to right, the second number is top down
     # side - (240, 173)
-    # 0.292 along the -y extended from the eoat
-    # 0.0889 in the positive x from the eoat
-    # 0.0 in the z from the eoat
+    # 0.292+0.3556 along the -y extended from the eoat
+    # -0.015875 in the x from the eoat                       0.0889 
+    # -0.060325 in the z from the eoat
     """pose_goal.position.x = -0.35 # - float(100.0 / 1000.0)
     pose_goal.position.y = -1.45 # THis is tha actual maximum
     pose_goal.position.z = 0.7"""
