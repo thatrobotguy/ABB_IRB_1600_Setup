@@ -17,6 +17,11 @@ This guide assumes many things about the people reading it. This guide is not fo
 ### In the beginning...
 The first thing you will need to do is set up a static ip address on your ethernet nic. In order to network with the robot, you will be connecting your device to an ethernet port on a network switch. At the time of writing of this document, this is an 8 port switch sitting on top of the robot controller. This switch is expected to be upgraded soon, so ask the prof if you cannot find it. I should thank the MQP team for pointing me in the right direction for some of these links. If anybody feels there are changes that need to be made, make a pull request or create a github bug thing or whatever it is called. Either I or somebody else may have seen the bug before. I have been making frequent updates so that this document looks as clean as possible. I also should mention that I have tried to list the steps in order, but some steps _can_ be done out of order, and some steps may be in the wrong order, so you should read this document in its entirety before embarking on the installation of ROS Industrial and MoveIt!. I should also mention that, before blindly doing the steps in all of these tutorials, you need to read the steps I ask you to do before you do them. For example, multiple tutorials show different commands that have to do with modifying your `~/.bashrc` flie. I already provide most of the environment variables that are necessary to make ROS work, therefore you should only add environment variables when they have been __explicitly__ mentioned __outside__ of this tutorial  and __not__ explicitly mentioned __here__. I should also mention that, for the networking portion of this tutorial, I am assuming that you are on WPI internet. If not, setting the static IP may require a different process. At home, I have to set the static IP on the router, not my desktop. Even then, I can only use simulation in this case. You will have to think about what you are doing before you go and do what these other links say to do. Also, if I say to git clone something, assume that it needs to be `git clone xxx` in your catkin workspace.
 
+## Updates
+
+I will be updating this document periodically. I will pose those updates __TO THE BOTTOM__ of the document. Be sure to check those out before continuing on...
+
+
 ## Static IP configuring
 In order to set a static ip address, you will first have to know some stuff.
 The ABB robot arm resides on a closed off local network. This means that it cannot access the internet (as one would hope).
@@ -360,6 +365,10 @@ You could also make this value larger:
 But if you are in manual mode it is easier to just turn of this safety. [This link](https://answers.ros.org/question/196586/how-do-i-disable-execution_duration_monitoring/) has more discussions about this problem.
 
 You may also encounter [this issue](https://github.com/qboticslabs/mastering_ros/issues/24) while trying to drive the robot. Also, if you are wanting to listen to transforms, you need to create a listener AFTER you call `initnode(argc, argv, "mynodename")`. This means that you cannot create a global variable listener outside of `main()` or `rosrun mypackage mynodewithtflisteners` will not work.
+
+## Updates
+
+I have decided that, given the amount of changes to the `abb_experimental` ros package, that it is best to simply fork it into my own github account and then modify everything there. Not only are the 3 launch files changed, but the .urdf and .xacro are also incorrect. Link 2 is actually 0.7 meters long, not 0.485 meters long (1.45 meter robot, not the 1.2 as stated before: both are the 6kg version). Simply clone [this repository](https://github.com/thatrobotguy/abb_experimental) instead of the stock `abb_experimental` repository and the edits will be taken care of for you. __Do note, however, that THE COLLISION PROTECTION IS NOW BROKEN__. This means that the robot could destroy itself until this is fixed. I will have to ask around about this. Ideally, this would be in a package called `abb_irb1600_6_145_moveit_config`, but I have not gotten that far yet. I have simply been reusing the `abb_irb1600_6_12_moveit_config` ros package. Once this is done, I can merge with the original repository hosted by [these guys](https://github.com/ros-industrial).
 
 #### More good links:
 ```

@@ -229,7 +229,7 @@ int main(int argc, char** argv)
   while (ros::ok())
   {
     // Increment the printing counter.
-    printcounter=(printcounter+1) % 40000000; // the number there is arbitrary - i just need it to slow the printing down   
+    printcounter=(printcounter+1) % 35000000; // the number there is arbitrary - i just need it to slow the printing down   
     // First we check to see if we have a new pose to move to.
     if (dowehavenewpose)
     {
