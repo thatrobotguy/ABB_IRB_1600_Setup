@@ -31,6 +31,9 @@ class TestABBPoseGeneration:
     self.homepose.position.z=float(1194.48 / 1000.0)
     # We are going to create an array containting the poses we will navigate to.
     self.squareposes=[]
+
+    # This is the hard coded z value for our final project
+    self.finalz=0.3
     """
     UNITS ARE IN METERS!!!!
 
@@ -41,39 +44,43 @@ class TestABBPoseGeneration:
     # Bottom left point in square
     pose_goal = geometry_msgs.msg.Pose()
     #pose_goal.orientation.w = 1.0
-    pose_goal.position.x = -0.5 # - float(100.0 / 1000.0)
+    pose_goal.position.x = -0.75 # - float(100.0 / 1000.0)
     pose_goal.position.y = -0.5 # - float(100.0 / 1000.0)
-    pose_goal.position.z = 0.5 # - float(100.0 / 1000.0)
+    pose_goal.position.z = self.finalz # - float(100.0 / 1000.0)
+
+    """
+    We are going to say that the z must always be set to 0.5. The y must never be greater than -0.4 or so. 
+    The X is the component must be between -.7 and .7 meters.
+    """
 
     # first, we append the home position.
-    self.squareposes.append(copy.deepcopy(self.homepose))
+    # self.squareposes.append(copy.deepcopy(self.homepose))
 
     # Now we append the pose goal into the array
+    # This position, from the robot persp, points towards the other robot arm, with the eoat pointing to the exit of the workshop.
     self.squareposes.append(copy.deepcopy(pose_goal))
 
     # Now we create the upper left trajectory.
-    pose_goal.position.x = self.homepose.position.x-float(100.0 / 1000.0)
-    pose_goal.position.y = self.homepose.position.y
-    pose_goal.position.z = self.homepose.position.z+float(100.0 / 1000.0)
+    # This pos points to the camera stand we have set up.
+    #pose_goal.position.x = -0.75
+    pose_goal.position.y = -0.75
 
     # Now we append the pose goal into the array
-    #self.squareposes.append(copy.deepcopy(pose_goal))
+    self.squareposes.append(copy.deepcopy(pose_goal))
     
     # Now we create the upper right trajectory.
-    pose_goal.position.x = self.homepose.position.x+float(100.0 / 1000.0)
-    pose_goal.position.y = self.homepose.position.y
-    pose_goal.position.z = self.homepose.position.z+float(100.0 / 1000.0) 
+    pose_goal.position.x = 0.75
+    #pose_goal.position.y = -0.75
 
     # Now we append the pose goal into the array
-    #self.squareposes.append(copy.deepcopy(pose_goal))
+    self.squareposes.append(copy.deepcopy(pose_goal))
     
     # Now we create the lower right trajectory.
-    pose_goal.position.x = self.homepose.position.x+float(100.0 / 1000.0)
-    pose_goal.position.y = self.homepose.position.y
-    pose_goal.position.z = self.homepose.position.z-float(100.0 / 1000.0)
+    # pose_goal.position.x = 0.75
+    pose_goal.position.y = -0.5
 
     # Now we append the pose goal into the array
-    #self.squareposes.append(copy.deepcopy(pose_goal))
+    self.squareposes.append(copy.deepcopy(pose_goal))
 
     # finally, we append the home position.
     #self.squareposes.append(copy.deepcopy(self.homepose))
@@ -90,7 +97,7 @@ class TestABBPoseGeneration:
     # First, send the pose we want.
     self.sendPixyPose.publish(self.squareposes[self.whichpose])
     # Now we delay a bit.
-    time.sleep(4) # Sleep for the input amount of seconds.
+    time.sleep(5) # Sleep for the input amount of seconds.
     # Now we increment the which position counter.
     self.whichpose=(self.whichpose+1)%len(self.squareposes)
 

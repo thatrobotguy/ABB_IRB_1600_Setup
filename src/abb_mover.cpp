@@ -179,14 +179,6 @@ int main(int argc, char** argv)
 
 
 
-
-
-
-
-
-
-
-
   // These next few lines are ripped from the mqp team
   // Get the ROS params and store them in this file.
   node_handle.getParam("home_pose/roll",roll);
@@ -223,15 +215,6 @@ int main(int argc, char** argv)
   // Now I want to see what the orientation is
   std::cout << "This is the quarternion for the end effector: \n" << poseEOAT.orientation << std::endl;
   // The part I ripped above was solely to orient the eoat in some hardcoded x,y,z
-
-
-
-
-
-
-
-
-
 
 
   // Back to my own code
@@ -284,7 +267,10 @@ int main(int argc, char** argv)
       // We do not have a new pose, so we do not want to move the robot.
       if (printcounter==0)
       {
+        // Tell us that the robot is waiting for a trajectory.
         ROS_INFO("Waiting for Pose Trajectory.");
+        // We also want to tell the other node that the robot is not moving, so we will publish that the robot is not moving here as well
+        pub.publish(armdoingmove);
       } else { }
     }
   }
