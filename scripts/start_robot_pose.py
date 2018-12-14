@@ -34,9 +34,9 @@ class TestABBPoseGeneration:
     # Bottom left point in square
     pose_goal = geometry_msgs.msg.Pose()
     #pose_goal.orientation.w = 1.0
-    pose_goal.position.x = -0.35 # - float(100.0 / 1000.0)
+    pose_goal.position.x = 0. # - float(100.0 / 1000.0)
     pose_goal.position.y = -1.0 # THis is tha actual maximum
-    pose_goal.position.z = 0.7
+    pose_goal.position.z = 0.3
 
     """
     We are going to say that the z must always be set to 0.5. The y must never be greater than -0.4 or so. 
@@ -51,7 +51,7 @@ class TestABBPoseGeneration:
     # First, send the pose we want.
     self.sendPixyPose.publish(self.squareposes[0])
     # Now we delay a bit.
-    time.sleep(5) # Sleep for the input amount of seconds.
+    time.sleep(2) # Sleep for the input amount of seconds.
     #
     # Point 1
     #
