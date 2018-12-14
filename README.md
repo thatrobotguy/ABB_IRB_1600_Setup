@@ -149,7 +149,7 @@ that will put you on the correct branch.
 
 # WAIT! 
 
-These are the old instructions"
+These are the old instructions:
 ```
 You now need the abb robot driver. This is in the non-experimental abb repository for ros industrial.
 This is the [link you need](https://github.com/ros-industrial/abb.git) to git clone.

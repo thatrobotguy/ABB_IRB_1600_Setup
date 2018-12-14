@@ -34,9 +34,12 @@ class TestABBPoseGeneration:
     # Bottom left point in square
     pose_goal = geometry_msgs.msg.Pose()
     #pose_goal.orientation.w = 1.0
-    pose_goal.position.x = 0. # - float(100.0 / 1000.0)
+    """pose_goal.position.x = 0. # - float(100.0 / 1000.0)
     pose_goal.position.y = -1.0 # THis is tha actual maximum
-    pose_goal.position.z = 0.3
+    pose_goal.position.z = 0.3"""
+    pose_goal.position.x = 0.5 # - float(100.0 / 1000.0)
+    pose_goal.position.y = -1.0 # THis is tha actual maximum
+    pose_goal.position.z = 0.75#0.3
 
     """
     We are going to say that the z must always be set to 0.5. The y must never be greater than -0.4 or so. 
