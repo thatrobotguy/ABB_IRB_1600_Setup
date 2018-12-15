@@ -323,7 +323,9 @@ https://answers.ros.org/question/196586/how-do-i-disable-execution_duration_moni
 <include file="$(find abb_irb1600_6_12_moveit_config)/launch/$(arg moveit_controller_manager)_moveit_controller_manager.launch.xml" />
 </launch>
 ```
-Now that I have the ROS Node working, we have to now look at the robot arm itself and the teach pendant. The first order of business is to boot the robot arm into `System2_ROS`. Assuming you are currently booted into `System2`, you will need to switch OSs. Click on the ABB logo in the upper left hand corner. Then click `Control Panel`. Then look down low at the last option in the list above the boot options. The option you want to click is `installed systems`. You then need to select the `System2_ROS` option and then look down and to the right and select `Activate`. Select `Yes` to start the reboot. The pendant will then reboot to the ROS arm configuration. Once that is done, you need to click on the “ABB” in the upper left and then select the `Program editor` option. Then you select `Debug` on the bottom and then select `PP to main` and then you should be set to go to…
+## How to start up the ABB IRB 1600 with ROS
+
+Now that you have ROS installed with the ABB packages, we have to now look at the robot arm itself and the teach pendant. The first order of business is to boot the robot arm into `System2_ROS`. Assuming you are currently booted into `System2`, you will need to switch OSs. Click on the ABB logo in the upper left hand corner. Then click `Control Panel`. Then look down low at the last option in the list above the boot options. The option you want to click is `installed systems`. You then need to select the `System2_ROS` option and then look down and to the right and select `Activate`. Select `Yes` to start the reboot. The pendant will then reboot to the ROS arm configuration. Once that is done, you need to click on the “ABB” in the upper left and then select the `Program editor` option. Then you select `Debug` on the bottom and then select `PP to main` and then you should be set to go to…
 
 STOP! NEVER FORGET THIS LAST STEP!
 
@@ -331,11 +333,9 @@ Press `play` on the teach pendant. ONLY THEN can you execute trajectories.
 
 BUT WAIT! THE TEACH PENDANT ERRORS OUT!
 
-You must be pressing the motors enable grip down just enough to enable the motors before your program will run, even if you are controlling everthing with ROS. If you forget to do so, the teach pendant will throw errors.
+You must be pressing the motors enable grip down just enough to enable the motors before your program will run, even if you are controlling everthing with ROS. If you forget to do so, the teach pendant will throw errors. This is true only if you are in manual mode.
 
-## How to start up the ABB IRB 1600 with ROS
-
-Now that you have installed everything and modified those 2 xml/launch files, you can now run this command to start the simulated robot up with ROS:
+Now that you have installed everything, you can now run this command to start the simulated robot up with ROS:
 ```
 roslaunch abb_irb1600_6_12_moveit_config moveit_planning_execution.launch robot_ip:=192.168.100.100 sim:=true
 ```
