@@ -27,7 +27,7 @@ In order to set a static ip address, you will first have to know some stuff.
 The ABB robot arm resides on a closed off local network. This means that it cannot access the internet (as one would hope).
 The a device attempts to connect to the arm, the arm expects ab IP address of `192.168.100.100`. This means that your machine _cannot_ be assigned this address. I gave my laptop a static IP of `192.168.100.123`. If you want to know what IP addresses are currently in use on the network, plug in to the switch and type this:
 ```
-sudo arp-scan --interface=myethernetcardname –localnet
+sudo arp-scan --interface=myethernetcardname --localnet
 ```
 This will list all of the IP addresses on the network that you have attached to your ethernet port on your laptop.
 In order to find out what your ethernet IP is, just run `ifconfig`. You should see something like this on the output:
@@ -61,7 +61,7 @@ wlp0s20f3 Link encap:Ethernet  HWaddr not:for:you:sucka
 ```
 Given this output, I would type this:
 ```
-sudo arp-scan --interface=enp7s0f1 –localnet
+sudo arp-scan --interface=enp7s0f1 --localnet
 ```
 If this errors out, you probably need to either install `arp-scan` or check your spelling.
 I should also mention that the address you choose _must_ be in the range of `192.168.1xx.2` to `92.168.1xx.255`.
