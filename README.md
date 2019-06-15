@@ -345,6 +345,11 @@ roslaunch abb_irb1600_6_12_moveit_config moveit_planning_execution.launch robot_
 ```
 The only difference being the `sim:=true/false` at the end.
 
+If you are using the real robot ABB IRB 120 3Kg, you use this command:
+```
+roslaunch abb_irb120_moveit_config moveit_planning_execution.launch robot_ip:=192.168.125.1 sim:=false
+```
+
 ## Final notes
 
 I find that the ROS stuff is more stable if you start the robot `pp to main` first, then run the launch file. You also do not need to start roscore separately as the launch file will do that for you. If you run into issues with roscore not working, you probably need to make sure you set the environment variables properly.
