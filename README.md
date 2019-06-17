@@ -139,7 +139,7 @@ You need to `cd` into your catkin workspace source folder, which is for me
 You will need to git clone some repositories into your workspace.
 
 Git clone this one on the `kinetic-devel` branch.
-https://github.com/ros-industrial/abb_experimental
+`https://github.com/ros-industrial/abb.git`
 
 Run `git branch -a` to figure out what branch you are currenly on. If you are on the wrong branch, run
 
@@ -152,7 +152,7 @@ that will put you on the correct branch.
 These are the old instructions:
 ```
 You now need the abb robot driver. This is in the non-experimental abb repository for ros industrial.
-This is the [link you need](https://github.com/ros-industrial/abb.git) to git clone.
+This is the [link you need](https://github.com/ros-industrial/abb_experimental) to git clone.
 ```
 
 You need to git clone my fork instead [which is linked](https://github.com/thatrobotguy/abb_experimental) here.
