@@ -128,6 +128,12 @@ You will also have to apt install this thing:
 Now you need to install MoveIt! You can go [here to install](http://docs.ros.org/kinetic/api/moveit_tutorials/html/doc/getting_started/getting_started.html) the regular way or you can go [here to install](http://moveit.ros.org/install/source/) from source. I got everything to work by first starting with the `apt-get` installations from the first link until nothing worked: then I went to the second link to install from source. I expect that, when you get to the second page from the first link, you cannot go further. This is because you need to do the advanced setup for MoveIt (build from source) since you still do not have all of the necessary packages set up. We will be modifying the launch files for the `abb` robot so it is best to just build `MoveIt!` from source. I have talked with many people on this subject, and they all recommend building from source, so you probably should too. When you build from source, make sure that you go to the bottom of the page and use the `build from source` instructions that uses the `ROS_DISTRO` environment variable; but do not forget the `apt-get` commands in those instructions. Also, where the MoveIt advanced install instructions say to do `catkin build`, you really want to do `catkin_make`. __If you do not do this, your catkin workspace will be BROKEN.__ As a reminder, this is the [link to the main webpage](https://moveit.ros.org/
 ) for the MoveIt libraries. This should not be necessary, but it is nice to know where other documentation is located.
 
+In case you are missing `ros_industrial_core`, just git clone this ros-i repo:
+```
+git clone https://github.com/ros-industrial/industrial_core.git
+```
+
+
 ## ABB Specific Installation
 
 Once you have built the moveit libraries from source, we need to get the ABB specific packages.
