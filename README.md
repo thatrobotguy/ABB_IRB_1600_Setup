@@ -145,7 +145,6 @@ This error happens when `catkin_make` cannot find the package. As an example, in
 git clone https://github.com/ros-industrial/industrial_core.git
 ```
 
-
 ## ABB Specific Installation
 
 Once you have built the moveit libraries from source, we need to get the ABB specific packages.
@@ -156,8 +155,7 @@ You need to `cd` into your catkin workspace source folder, which is for me
 
 You will need to git clone some repositories into your workspace.
 
-Git clone this one on the `kinetic-devel` branch.
-`https://github.com/ros-industrial/abb.git`
+Git clone [this repo](https://github.com/ros-industrial/abb.git) on the `kinetic-devel` branch. This repo gives support for some of the robots you may need, but not all of them. 
 
 Run `git branch -a` to figure out what branch you are currenly on. If you are on the wrong branch, run
 
@@ -165,26 +163,16 @@ Run `git branch -a` to figure out what branch you are currenly on. If you are on
 
 that will put you on the correct branch.
 
-# WAIT! 
-
-These are the old instructions:
-```
-You now need the abb robot driver. This is in the non-experimental abb repository for ros industrial.
-This is the [link you need](https://github.com/ros-industrial/abb_experimental) to git clone.
-```
-
-You need to git clone my fork instead [which is linked](https://github.com/thatrobotguy/abb_experimental) here.
+The other `ABB` specific package is the `abb_experimental` package provided by `ROS-I`. Their version of the package includes the `ABB IRB1600 1.2` robot, but the robot we have is the `ABB IRB1600 1.45`. Therefore, in order to make the installation easier, you can git clone my fork instead, [which is linked](https://github.com/thatrobotguy/abb_experimental) here.
 
 Now that you have downloaded all of those repositories into your workspace, you can finally run `catkin_make` in
 `/home/$USER/catkin_ws/`.
 
-I should note that you should NOT `catkin_make` until everything is git cloned, except for after using `wstool` to get the `MoveIt!` repositories when building from source.
+I should note that you should NOT `catkin_make` until everything is git cloned, except for after using `wstool` to get the `MoveIt!` repositories when building from source. That compilation will take the longest, so reserve 15-20 minutes to do that.
 
-### Now that you have git cloned everything, you now can skip the "ABB Package Modifications" steps and go to the "How to start up the ABB IRB 1600 with ROS" steps
+## How to start up the ABB IRB 1600/120 with ROS
 
-## How to start up the ABB IRB 1600 with ROS
-
-Now that you have ROS installed with the ABB packages, we have to now look at the robot arm itself and the teach pendant. The first order of business is to boot the robot arm into `System2_ROS`. Assuming you are currently booted into `System2`, you will need to switch OSs. Click on the ABB logo in the upper left hand corner. Then click `Control Panel`. Then look down low at the last option in the list above the boot options. The option you want to click is `installed systems`. You then need to select the `System2_ROS` option and then look down and to the right and select `Activate`. Select `Yes` to start the reboot. The pendant will then reboot to the ROS arm configuration. Once that is done, you need to click on the “ABB” in the upper left and then select the `Program editor` option. Then you select `Debug` on the bottom and then select `PP to main` and then you should be set to go to…
+Now that you have ROS installed with the ABB packages, we have to now look at the robot arm itself and the teach pendant. The first order of business is to boot the robot arm into `System2_ROS`. Assuming you are currently booted into `System2` or `System1`, you will need to switch OSs. If you are brand spanking new to this, and you don't have the robot set up with the server socket program in `RAPID`, you can follow the instructions [here](https://wiki.ros.org/abb/Tutorials). That tutorial explains everything required to get the server ready to accept ROS commands through `MoveIt!`. Once the Teach Pendant is booted up to the correct operating system, click on the ABB logo in the upper left hand corner. Then click `Control Panel`. Then look down low at the last option in the list above the boot options. The option you want to click is `installed systems`. You then need to select the `System2_ROS` option and then look down and to the right and select `Activate`. Select `Yes` to start the reboot. The pendant will then reboot to the ROS arm configuration. Once that is done, you need to click on the “ABB” in the upper left and then select the `Program editor` option. Then you select `Debug` on the bottom and then select `PP to main` and then you should be set to go to…
 
 STOP! NEVER FORGET THIS LAST STEP!
 
