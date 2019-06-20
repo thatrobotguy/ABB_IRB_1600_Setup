@@ -140,7 +140,7 @@ Now you need to install MoveIt! You can go [here to install](http://docs.ros.org
 
 ## blahConfig.cmake missing
 
-This error happens when `catkin_make` cannot find the package. As an example, in case you are missing `ros_industrial_core`, just git clone this `ROS-I` repo (into your catkin workspace)[git clone https://github.com/ros-industrial/industrial_core.git].
+This error happens when `catkin_make` cannot find the package. As an example, in case you are missing `ros_industrial_core`, just git clone this `ROS-I` repo (into your catkin workspace)[https://github.com/ros-industrial/industrial_core.git].
 
 ## ABB Specific Installation
 
