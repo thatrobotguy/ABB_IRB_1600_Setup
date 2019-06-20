@@ -80,6 +80,16 @@ Then you click `edit`. Now, go to the IPv4 settings tab and set the `Method` to 
 
 Now once these are set you will want to click `save` and then restart your machine to make sure all your changes are written properly.
 
+## I am using a USB to Ethernet adapter of some kind. Does that work too?
+
+Yes, you can use an adapter. The only issue I have experienced is that you have to set up the static `ip` every single time you boot your machine. This is just an issue when you don't have the best hardware for the job. If you are to recommend somebody to buy a machine for `ROS-I`, I would recommend something with these specs:
+
+1. Dedicated ethernet port
+2. 6 CPU cores (or 4 with Hyperthreading enabled) Basically, If you have an `I7-4th Gen` or `I5-8th gen` you should be good to go.
+3. 16 Gigabytes of ram at 2400 KHz minimum (You can add ram later, but at least check that you can get that much) People can get by with less, but IDE's like that made by Jetbrains are very RAM intensive.
+4. _Not_ a `4K` screen - 1920x1080p works great for these applications. Especially if you are on a laptop, the `4K` only makes things worse.
+5. Ideally, use a desktop instead - desktops have dedicated NIC cards that are great with static IPs, especially dual-nic machines.
+
 ## ROS Setup
 
 First, you will need to make sure you have `ros-kinetic-desktop-full` installed on your ubuntu 1604 linux machine. My ROS catkin workspace is located here:
