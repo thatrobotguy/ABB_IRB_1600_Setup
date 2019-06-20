@@ -193,6 +193,7 @@ If you are using the real robot ABB IRB 120 3Kg, you use this command:
 ```
 roslaunch abb_irb120_moveit_config moveit_planning_execution.launch robot_ip:=192.168.125.1 sim:=false
 ```
+Remember, If you do not know the `robot_ip`, you can use `arp-scan` to find it.
 
 ## Final notes
 
