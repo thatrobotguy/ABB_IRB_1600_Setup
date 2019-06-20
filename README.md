@@ -180,7 +180,7 @@ Press `play` on the teach pendant. ONLY THEN can you execute trajectories.
 
 BUT WAIT! THE TEACH PENDANT ERRORS OUT!
 
-You must be pressing the motors enable grip down just enough to enable the motors before your program will run, even if you are controlling everthing with ROS. If you forget to do so, the teach pendant will throw errors. This is true only if you are in manual mode.
+TURN ON AUTOMATIC MODE. If you are in Manual mode, you must be pressing the motors enable grip down just enough to enable the motors before your program will run, even if you are controlling everthing with ROS. If you forget to do so, the teach pendant will throw errors. If you are a total nube, however, I suggest you use Manual mode to start until you know your program is good.
 
 Now that you have installed everything, you can now run this command to start the simulated robot up with ROS:
 ```
