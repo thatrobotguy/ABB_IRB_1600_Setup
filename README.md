@@ -199,8 +199,7 @@ Remember, If you do not know the `robot_ip`, you can use `arp-scan` to find it.
 
 I find that the ROS stuff is more stable if you start the robot `pp to main` first, then run the launch file. You also do not need to start roscore separately as the launch file will do that for you. If you run into issues with roscore not working, you probably need to make sure you set the environment variables properly.
 
-I believe that this is everything required to get the arm to work. You should call the uppermost launch file described earlier in their own custom launch file in their own custom ROS package so that they do not have any of the ROS-Industrial packages in their personal git repositories. The MQP team made that mistake already.
-
+I believe that this is everything required to get the arm to work. You should call the uppermost launch file described earlier in their own custom launch file in their own custom ROS package so that they do not have any of the ROS-Industrial packages in their personal git repositories. I have seen teams make this mistake already.
 ## Possible Errors
 
 Sometimes you may get this error while running in manual mode:
