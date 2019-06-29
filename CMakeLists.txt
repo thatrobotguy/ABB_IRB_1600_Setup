@@ -160,6 +160,9 @@ include_directories(
 add_executable(abb_mover src/abb_mover.cpp)
 target_link_libraries(abb_mover ${catkin_LIBRARIES} ${Boost_LIBRARIES} )
 
+add_executable(importme src/importtester.cpp)
+target_link_libraries(importme ${catkin_LIBRARIES} ${Boost_LIBRARIES} )
+
 #############
 ## Install ##
 #############
