@@ -238,7 +238,7 @@ int main(int argc, char** argv)
       // This means we need to do the visual updating to get the arm to move.
       // First we set the target
       move_group.setPoseTarget(poseEOAT);
-
+  
       /* 
       // Now, we call the planner to compute the plan and visualize it.
       // Note that we are just planning, not asking move_group
