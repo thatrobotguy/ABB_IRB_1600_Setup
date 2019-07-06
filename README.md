@@ -152,6 +152,8 @@ catkin_make
 
 This error happens when `catkin_make` cannot find the package. As an example, in case you are missing `ros_industrial_core`, just git clone this `ROS-I` repo [into your catkin workspace](https://github.com/ros-industrial/industrial_core.git).
 
+If there are any other packages missing, I suggest you google them. If you have a crap ton of missing packages, it is possible you messed up your installation of ROS Kinetic. The easiet solution for me is to reinsall ROS.
+
 ## ABB Specific Installation
 
 Once you have built the moveit libraries from source, we need to get the ABB specific packages.
