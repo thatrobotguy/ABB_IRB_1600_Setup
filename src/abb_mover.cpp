@@ -96,10 +96,7 @@ void poseCallback(const geometry_msgs::Pose& msg)
 // roscore
 // roslaunch abb_irb1600_6_12_moveit_config moveit_planning_execution.launch robot_ip:=192.168.100.100 sim:=true
 // roslaunch abb_1600_driver abb_interface.launch
-// rosrun moveit_tutorials pose_generator.py 
-
-// This is the old python script
-// rosrun moveit_tutorials andrew_abb_move.py   
+// rosrun moveit_tutorials pose_generator.py   
 
 /*
   I have to give credit to the MQP guys because I am ripping some of the logic straight from there repository
