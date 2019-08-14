@@ -121,7 +121,7 @@ export ROS_DISTRO=kinetic
 # https://answers.ros.org/question/163556/how-to-solve-couldnt-find-an-af_inet-address-for-problem/
 export ROS_IP=${machine_ip[0]}
 ```
-Supposedly you do not need to set ROS_MASTER_URI or ROS_HOSTNAME, but I seem to get more stable results setting these environment variables, I am telling you to do the same.
+Supposedly you do not need to set ROS_MASTER_URI or ROS_HOSTNAME, but I seem to get more stable results setting these environment variables, I am telling you to do the same. Also, if you plan on using `Matlab` alongside this repository, you *will* need to set those environment variables in your `~/.bashrc` file.
 If you do not want to use `hostname -I`, you can run `ifconfig` and look for `inet addr: xxx.xxx.xxx.xxx` to set the address.
 Make sure to run `source ~/.bashrc` in all open terminals once that is all done. If you want an official explanation to what these variables are doing, [check out this link.](http://wiki.ros.org/ROS/EnvironmentVariables)
 
