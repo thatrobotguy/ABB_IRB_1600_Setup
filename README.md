@@ -90,7 +90,7 @@ Yes, you can use an adapter. The only issue I have experienced is that you have 
 4. _Not_ a `4K` screen - 1920x1080p works great for these applications. Especially if you are on a laptop, the `4K` only makes things worse.
 5. Ideally, use a desktop instead - desktops have dedicated NIC cards that are great with static IPs, especially dual-nic machines.
 
-I should also mention that, if you plan on using `Matlab` on this machine as well, you will need to activate the `Matlab` license in the correct hardware configuration that you want to use with `ROS-I`. In other words, `Matlab` will complain if you unplug your USB to Ethernet adapter that you used to drive the robot arm. This is just a quirk of `Matlab` I thought you should be aware of. I have friends that use this repo alongside `Matlab` so I thought you should know. If this is an issue, there is an executable under the `Matlab` installation location for \*nix systems.
+I should also mention that, if you plan on using `Matlab` on this machine as well, you will need to activate the `Matlab` license in the correct hardware configuration that you want to use with `ROS-I`. In other words, `Matlab` will complain if you unplug your USB to Ethernet adapter that you used to drive the robot arm. This is just a quirk of `Matlab` I thought you should be aware of. I have friends that use this repo alongside `Matlab` so I thought you should know. If this is an issue, there is an executable under the `Matlab` installation location for \*nix systems that allows you to re-license your `Matlab` machine such that it has the hardware configuration that you plan on using consistently.
 
 ## ROS Setup
 
