@@ -58,15 +58,8 @@ bool dowehavenewpose = false;
 // Is the arm done moving?
 std_msgs::Bool armdoingmove;
 
-
 std::string base_frame = "/base_link";
-//Location variables set at launch
-float roll, pitch, yaw;
-float x, y, z;
-tf::Quaternion q_rot;
-tf::StampedTransform j6_trans;
-tf::Transform tool_trans;
-tf::Transform j6_to_base;
+tf::StampedTransform tool_tf;
 
 // This is the callback function for receiving the pose we want to go to
 void poseCallback(const geometry_msgs::Pose& msg)
@@ -79,11 +72,6 @@ void poseCallback(const geometry_msgs::Pose& msg)
     poseEOAT.position.x=msg.position.x;
     poseEOAT.position.y=msg.position.y;
     poseEOAT.position.z=msg.position.z;
-    // Now we get the orientation info. For now, we ignore the wanted orientation from the pose publisher.
-    // quaternionTFToMsg(q_rot,poseEOAT.orientation);
-
-    // The line above only happens once in main()
-
     poseEOAT.orientation.x=msg.orientation.x;
     poseEOAT.orientation.y=msg.orientation.y;
     poseEOAT.orientation.z=msg.orientation.z;
@@ -98,21 +86,15 @@ void poseCallback(const geometry_msgs::Pose& msg)
 // roslaunch abb_1600_driver abb_interface.launch
 // rosrun moveit_tutorials pose_generator.py   
 
-
-
-
-
-
-
 // The main running code.
 int main(int argc, char** argv)
 {
   // This MUST BE CALLED FIRST!!
-  ros::init(argc, argv, "abb_mover");
+  ros::init(argc, argv, "abb_free_pose");
 
   ros::NodeHandle node_handle;
   // I forgot to register the subscriber
-  ros::Subscriber sub = node_handle.subscribe("/pixy_traj", 2, poseCallback); // the second argument is the queue size
+  ros::Subscriber sub = node_handle.subscribe("/do_arm_traj", 2, poseCallback); // the second argument is the queue size
   /*
     This node pulblishes to a topic so that other nodes can know that 
     the robot is busy moving to a pose provided by this node. 
@@ -167,57 +149,15 @@ int main(int argc, char** argv)
   // We can also print the name of the end-effector link for this group.
   ROS_INFO_NAMED("tutorial", "End effector link: %s", move_group.getEndEffectorLink().c_str());
 
-  /*
-    At this point, we have loaded all of the information we need to start the node.
-    Now we just need to receive poses from the callback function before we call the planner.
-    This means that we can simply have a while true loop that does nothing but make the
-    program wait.
-  */
-
-
-
-  // These next few lines are ripped from the mqp team
-  // Get the ROS params and store them in this file.
-  node_handle.getParam("home_pose/roll",roll);
-	node_handle.getParam("home_pose/pitch",pitch);
-  node_handle.getParam("home_pose/yaw",yaw);
-  node_handle.getParam("home_pose/x_pos",x);
-	node_handle.getParam("home_pose/y_pos",y);
-  node_handle.getParam("home_pose/z_pos",z);
-  // Convert to radians
-  roll=roll*(M_PI/180);
-  pitch=pitch*(M_PI/180);
-  yaw=yaw*(M_PI/180);
-  // create quarternion
-  q_rot = tf::createQuaternionFromRPY(roll, pitch, yaw);
-  // Now we set the end of arm tooling orientation.
-  // quaternionTFToMsg(q_rot,poseEOAT.orientation);
-  quaternionTFToMsg(q_rot,poseEOAT.orientation);
-  // Now we set the orientation of the home pose to the same thing because we know it is valid.
-  quaternionTFToMsg(q_rot,homepose.orientation);
-  std::cout << "This is the quarternion for the HOME POSITION end effector: \n" << homepose.orientation << std::endl;
-  // Now we fill in the position
-  poseEOAT.position.x=x;
-  poseEOAT.position.y=y;
-  poseEOAT.position.z=z;
-  // Now we place the wanted pose into a transform.
-  tf::poseMsgToTF(poseEOAT, tool_trans);
-  // Get the transform between the base link and the end effector-mounted link
-  // Block code and wait until a frame is available
-  listener.waitForTransform("/base_link","/tool0",ros::Time(0), ros::Duration(4.0));
   // Just DO IT! and grab the frame.
-  listener.lookupTransform("/base_link", "/tool0", ros::Time(0), j6_trans);
-  // Bring the transform with respect to the base
-  j6_to_base = j6_trans * tool_trans;
+  listener.lookupTransform("/base_link", "/tool0", ros::Time(0), tool_tf);
   // Now we set he transform message to the pose
-  tf::poseTFToMsg(j6_to_base, poseEOAT);
+  tf::poseTFToMsg(tool_tf, poseEOAT);
   // Now I want to see what the orientation is
-  std::cout << "This is the quarternion for the end effector: \n" << poseEOAT.orientation << std::endl;
-  // The part I ripped above was solely to orient the eoat in some hardcoded x,y,z
+  std::cout << "This is the position and orientation for the end effector:\n" << poseEOAT.position << 
+    "\n\n" << poseEOAT.orientation << std::endl;
 
-
-  // Back to my own code
-  // Initialize the is moving boolean
+  // Initialize the "is moving" boolean
   armdoingmove.data=false;
   pub.publish(armdoingmove);
 
@@ -228,7 +168,7 @@ int main(int argc, char** argv)
   while (ros::ok())
   {
     // Increment the printing counter.
-    printcounter=(printcounter+1) % 35000000; // the number there is arbitrary - i just need it to slow the printing down   
+    //printcounter=(printcounter+1) % 35000000; // the number there is arbitrary - i just need it to slow the printing down   
     // First we check to see if we have a new pose to move to.
     if (dowehavenewpose)
     {
@@ -264,7 +204,7 @@ int main(int argc, char** argv)
       // I am not 100% sure, but I think that the order of this "I'm done publisher" and actually moving DOES MATTER
     } else {
       // We do not have a new pose, so we do not want to move the robot.
-      if (printcounter==0)
+      if (! (printcounter=(printcounter+1) % 1000000000))
       {
         // Tell us that the robot is waiting for a trajectory.
         ROS_INFO("Waiting for Pose Trajectory.");
