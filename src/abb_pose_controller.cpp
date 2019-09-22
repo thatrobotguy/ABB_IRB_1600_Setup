@@ -4,8 +4,13 @@
   to this ROS node and it will send it to the ABB robot controller node that then send
   a message to the arm to drive it.
 
-  This package was written by:
-  
+  How to run:
+
+  1. roscore
+  2. roslaunch abb_irb1600_6_12_moveit_config moveit_planning_execution.launch robot_ip:=192.168.100.100 sim:=true
+  3. roslaunch abb_1600_driver abb_full_pose.launch
+
+  This package was written by:  
   thatrobotguy
 
 */
@@ -23,19 +28,14 @@
 
 // Make sure we have access to the necessary messages.
 #include <geometry_msgs/Pose.h>
-
 #include "std_msgs/String.h"
 #include "std_msgs/Bool.h"
-
-
 #include <tf/tf.h>
 #include <tf/transform_listener.h>
 #include <math.h>
 #include <tf/transform_datatypes.h>
-
 // For cout
 #include <iostream>
-
 
 // "manipulator" is for the abb arm.
 static const std::string PLANNING_GROUP = "manipulator";
@@ -48,9 +48,6 @@ int printcounter = 0;
 
 // This is where we store the pose we want to go to. THIS IS THE FINAL POSE TO SEND TO THE ROBOT.
 geometry_msgs::Pose poseEOAT;
-
-// This is the home pose
-geometry_msgs::Pose homepose;
 
 // This is the boolean flag that says if we have a new pose or not.
 bool dowehavenewpose = false;
@@ -80,11 +77,6 @@ void poseCallback(const geometry_msgs::Pose& msg)
     dowehavenewpose = true;
   }
 }
-
-// roscore
-// roslaunch abb_irb1600_6_12_moveit_config moveit_planning_execution.launch robot_ip:=192.168.100.100 sim:=true
-// roslaunch abb_1600_driver abb_interface.launch
-// rosrun moveit_tutorials pose_generator.py   
 
 // The main running code.
 int main(int argc, char** argv)

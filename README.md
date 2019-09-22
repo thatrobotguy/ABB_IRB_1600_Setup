@@ -209,6 +209,30 @@ roslaunch abb_irb120_moveit_config moveit_planning_execution.launch robot_ip:=19
 ```
 Remember, If you do not know the `robot_ip`, you can use `arp-scan` to find it.
 
+## Example Robot Arm controller
+
+I have created a ROS node that acts as the middleware to ROS-I. Basically, you need to create a `move_group` message, not just a `geometry_msgs/Pose`, so I have written an abstract controller that wraps the `move_group` functionality such that you only need to publish a `geometry_msgs/Pose` to the `/do_arm_traj` topic.
+
+This is the command to start the middleware ROS node:
+```
+roslaunch abb_1600_driver abb_full_pose.launch
+```
+
+If you don't already have a ROS node created, but you still want to demo the ROS node/make sure it works, here is a CLI command that you can run for the ABB IRB1600 1.45 length 6 kg robot:
+```
+rostopic pub /do_arm_traj geometry_msgs/Pose "position:
+  x: 0.510
+  y: -0.510
+  z: 0.750
+orientation:
+  x: -0.50
+  y: 0.50
+  z: -0.50
+  w: 0.50"
+```
+
+Check out my extra notes under `frame_files/findingframes.md` for more info on `tf` frames. I suggest you figure out valid frames BEFORE you start sending them to the real robot (aka set `sim:=true` first).
+
 ## Final notes
 
 I find that the ROS stuff is more stable if you start the robot `pp to main` first, then run the launch file. You also do not need to start roscore separately as the launch file will do that for you. If you run into issues with roscore not working, you probably need to make sure you set the environment variables properly.
