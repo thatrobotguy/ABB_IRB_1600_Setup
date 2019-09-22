@@ -1,0 +1,9 @@
+
+<!--see readme section on launch files for details on how to use file-->
+<launch>
+  <!-- Node name, package name, what the name of the node is from the cpp file, the last thing I do not know. -->
+  <node name="abb_full_pose_controller" pkg="abb_1600_driver" type="abb_pose_control"  output="screen"> 
+      
+  </node>
+
+</launch>

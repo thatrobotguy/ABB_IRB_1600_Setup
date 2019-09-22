@@ -163,6 +163,10 @@ target_link_libraries(abb_mover ${catkin_LIBRARIES} ${Boost_LIBRARIES} )
 add_executable(importme src/importtester.cpp)
 target_link_libraries(importme ${catkin_LIBRARIES} ${Boost_LIBRARIES} )
 
+add_executable(abb_pose_control src/abb_pose_controller.cpp)
+target_link_libraries(abb_pose_control ${catkin_LIBRARIES} ${Boost_LIBRARIES} )
+
+
 #############
 ## Install ##
 #############
