@@ -26,15 +26,21 @@ In order to set a static ip address, you will first have to know some stuff.
 
 For the networking portion of this tutorial, I am assuming that you are on a network that is managed by a business or school. If not, setting the static IP may require a different process. At home, I have to set the static IP on the router, not my desktop. Even then, I can only use simulation in this case. You will have to think about what you are doing before you go and do what these other links say to do. 
 
-The first thing you will need to do is set up a static ip address on your ethernet nic. In order to network with the robot, you will be connecting your device to an ethernet port on a network switch. You can directly interrface with the IRC5 ethernet port (the one that is _not_ the `LAN` port), but it is better to use a switch, especially if your cables are too short or if you need other sensors in the ROS local network. 
+The first thing you will need to do is set up a static ip address on the ethernet nic on the machine that will directly drive the robot.
 
-The ABB robot arm resides on a closed off local network. This means that it cannot access the internet (as one would hope).
-The a device attempts to connect to the arm, the arm expects ab IP address of `192.168.100.100`. This means that your machine _cannot_ be assigned this address. I gave my laptop a static IP of `192.168.100.123`. If you want to know what IP addresses are currently in use on the network, plug in to the switch and type this:
+### Assuming you are using the setup in Washburn
+
+In order to network with the robot, you will be connecting your device to an ethernet port on a network switch. You can directly interrface with the IRC5 ethernet port (the one that is _not_ the `LAN` port), but it is better to use a switch, especially if your cables are too short or if you need other sensors in the ROS local network. 
+
+The ABB robot arm resides on a closed off local network. Even in manufacturing lines, the robot arms reside on their own local network. This means that the arm cannot _directly_ access the internet (as one would hope).
+The device that attempts to connect to the arm should note that the arm expects to be assigned an IP address of `192.168.100.100`. This means that your machine _cannot_ be assigned this address. I gave my laptop a static IP of `192.168.100.123`. If you want to know what IP addresses are currently in use on the network, plug in to the switch and type this:
 ```
 sudo arp-scan --interface=myethernetcardname --localnet
 ```
-This will list all of the IP addresses on the network that you have attached to your ethernet port on your laptop.
-In order to find out what your ethernet IP is, just run `ifconfig`. You should see something like this on the output:
+(I am also assuming that the network is Ethernet only as there usually is NOT a WiFi network available).
+
+This command will list all of the IP addresses on the network that you have attached to your ethernet port on your laptop.
+In order to find out what your ethernet IP is, just run `ifconfig`, or, if you want to use a more modern command, `ip addr`. You should see something like this on the output:
 ```
 $USER@$USER-MyComputerModel:~$ ifconfig
 enp7s0f1  Link encap:Ethernet  HWaddr jokes:on:you:bro
@@ -63,13 +69,14 @@ wlp0s20f3 Link encap:Ethernet  HWaddr not:for:you:sucka
           RX bytes:17042440 (17.0 MB)  TX bytes:2453717 (2.4 MB)
 
 ```
-Given this output, I would type this:
+Given this output, I would type this to scan the local network for connected devices:
 ```
 sudo arp-scan --interface=enp7s0f1 --localnet
 ```
 If this errors out, you probably need to either install `arp-scan` or check your spelling.
 I should also mention that the address you choose _must_ be in the range of `192.168.1xx.2` to `92.168.1xx.255`.
-Now that you have figured out what IP addresses are currently is use, decide what IP address you would like to use. 
+Now that you have figured out what IP addresses are currently is use, decide what IP address you would like to use on your laptop. 
+
 You first need to click on the internet symbol in the upper right hand corner (furthest left icon):
 
 ![Image of Ubuntuwifi](https://github.com/thatrobotguy/WPI_ABB_IRB_1600_Setup/blob/master/upperrightcorner.png)
