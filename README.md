@@ -254,7 +254,7 @@ Sometimes you may get this error while running in manual mode:
 ```
 [ERROR] [1544201172.958564157]: Controller is taking too long to execute trajectory (the expected upper bound for the trajectory execution was 4.625994 seconds). Stopping trajectory.
 ```
-You need to look at that 3rd launch flie I provided and give the robot more time to execute trajectories.
+This is why I forked the original `abb_experimental` repository. The stock version is kind of jank. I mentioned in the `README.md` file of that [forked repo](https://github.com/thatrobotguy/abb_experimental) that there are 3 launch files that were edited (not including the robot model changes). You need to look at that 3rd launch flie I provided and give the robot more time to execute trajectories.
 You can do that by changing this line:
 ```
 <param name="trajectory_execution/execution_duration_monitoring" value="true" />
