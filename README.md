@@ -240,6 +240,16 @@ I find that the ROS stuff is more stable if you start the robot `pp to main` fir
 I believe that this is everything required to get the arm to work. You should call the uppermost launch file described earlier in their own custom launch file in their own custom ROS package so that they do not have any of the ROS-Industrial packages in their personal git repositories. I have seen teams make this mistake already.
 ## Possible Errors
 
+You may get an error when you start the robot launch file. You may get something like this:
+```
+[ERROR] [1571681258.303701135]: The kinematics plugin (manipulator) failed to load. Error: According to the loaded plugin descriptions the class trac_ik_kinematics_plugin/TRAC_IKKinematicsPlugin with base class type kinematics::KinematicsBase does not exist. Declared types are  abb_irb2400_manipulator_kinematics/IKFastKinematicsPlugin cached_ik_kinematics_plugin/CachedKDLKinematicsPlugin cached_ik_kinematics_plugin/CachedSrvKinematicsPlugin kdl_kinematics_plugin/KDLKinematicsPlugin lma_kinematics_plugin/LMAKinematicsPlugin srv_kinematics_plugin/SrvKinematicsPlugin
+[ERROR] [1571681258.303752400]: Kinematics solver could not be instantiated for joint group manipulator.
+```
+This is solved by installing `trac-ik` like this:
+```
+sudo apt install ros-kinetic-trac-ik
+```
+
 Sometimes you may get this error while running in manual mode:
 ```
 [ERROR] [1544201172.958564157]: Controller is taking too long to execute trajectory (the expected upper bound for the trajectory execution was 4.625994 seconds). Stopping trajectory.
