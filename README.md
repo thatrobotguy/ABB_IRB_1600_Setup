@@ -211,6 +211,12 @@ Remember, If you do not know the `robot_ip`, you can use `arp-scan` to find it.
 
 ## Example Robot Arm controller
 
+There are 2 main middleware ROS nodes provided in this package. The first node starts up an example action server that receives a pose message and then handles the communication with the robot launch file. When you start the action server defined as the `abb_mover` executable, _right after you start the ABB robot node_, the action server will automatically set the orientation of any received poses to the rpy angles set in the referenced yaml file. All you need to do is send "x,y,z" values that are non-zero and the robot will handle the joint orientation. Currently, you need to have the robot set to the zero position before you start the action server. I highly recommend changing this so that you can arbitrarily move the robot (thorugh RViz) before you start the action server. This is the simpler, dumber way to drive the robot, as you have know control of the EoAT orientation with this node.
+
+The other ROS node provides an interface to send the robot a generic X/Y/Z position and W/X/Y/Z quaternion orientation. This is the recommended node to use as it forces the user to listen to frame transforms like a good robotics engineer. I also gives more flexibility for the programmer to reach a valid pose if orientation does not matter.
+
+It should be noted that this ros package is simply an example on how to control the arm with ROS 1. You should be able to get the arm up and running in a couple hours with a simple pose publisher _that publishes valid possible poses in the task space_. Do not worry: the MoveIt! IK planner is smart, but do remember, the collision for link 2, at the moment, is currently too forgiving (convex hulls again).
+
 I have created a ROS node that acts as the middleware to ROS-I. Basically, you need to create a `move_group` message, not just a `geometry_msgs/Pose`, so I have written an abstract controller that wraps the `move_group` functionality such that you only need to publish a `geometry_msgs/Pose` to the `/do_arm_traj` topic.
 
 This is the command to start the middleware ROS node:
@@ -218,7 +224,7 @@ This is the command to start the middleware ROS node:
 roslaunch abb_1600_driver abb_full_pose.launch
 ```
 
-If you don't already have a ROS node created, but you still want to demo the ROS node/make sure it works, here is a CLI command that you can run for the ABB IRB1600 1.45 length 6 kg robot:
+If you don't already have a ROS node generating `geometry_msgs/Pose` messages to the correct ROS topic, but you still want to demo the ROS node and make sure it works, here is a CLI command that you can run for the ABB IRB1600 1.45 length 6 kg robot:
 ```
 rostopic pub /do_arm_traj geometry_msgs/Pose "position:
   x: 0.510
@@ -230,8 +236,9 @@ orientation:
   z: -0.50
   w: 0.50"
 ```
+I specify the larger robot simply because the X/Y/Z components of the EoAT are too far away for the smaller robot.
 
-Check out my extra notes under `frame_files/findingframes.md` for more info on `tf` frames. I suggest you figure out valid frames BEFORE you start sending them to the real robot (aka set `sim:=true` first).
+Once you start working on your own ROS node, you may want to check out my extra notes under `frame_files/findingframes.md` for more info on `tf` frames. I suggest you figure out valid frames BEFORE you start sending them to the real robot (aka set `sim:=true` first). You will need the frame transforms when you want to localize the robot into your custom workspace.
 
 ## Final notes
 
@@ -272,11 +279,13 @@ But if you are in manual mode it is easier to just turn off this safety. [This l
 
 You may also encounter [this issue](https://github.com/qboticslabs/mastering_ros/issues/24) while trying to drive the robot. Also, if you are wanting to listen to transforms, you need to create a listener AFTER you call `initnode(argc, argv, "mynodename")`. This means that you cannot create a global variable listener outside of `main()` or `rosrun mypackage mynodewithtflisteners` will not work.
 
-If you have been poking around this repository, you will notice that there is a launch file and a ros node provided. This is an example action server that receives a pose message and then handles the communication with the robot launch file. When you start the action server, _right after you start the robot node_, the action server will automatically set the orientation of any received poses to the rpy angles set in the referenced yaml file. All you need to do is send "x,y,z" values that are non-zero and the robot will handle the joint orientation. Currently, you need to have the robot set to the zero position before you start the action server. I highly recommend changing this so that you can arbitrarily move the robot (thorugh RViz) before you start the action server. This ros package is simply an example on how to control the arm with ROS 1. You should be able to get the arm up and running in a couple hours with a simple pose publisher _that publishes valid possible poses in the task space_. Do not worry: the MoveIt! IK planner is smart, but do remember, the collision for link 2, at the moment, is currently too forgiving.
-
 ## Updates
 
 I have decided that, given the amount of changes to the `abb_experimental` ros package, that it is best to simply fork it into my own github account and then modify everything there. Not only are the 3 launch files changed, but the .urdf and .xacro have also been updated with the correct link 2 lengths. Link 2 is actually 0.7 meters long, not 0.485 meters long. The original ROS package meshes describe the 1.2 meter robot, not the 1.45 meter robot that WPI owns (both are the 6kg version though). Simply clone [this repository](https://github.com/thatrobotguy/abb_experimental) instead of the stock `abb_experimental` repository and the edits will be taken care of for you. __Do note, however, that colision protection is not as effective as it would be normally__. What I mean is that the current collision mesh file for link 2 is currently the same as the visual file. It is better to use the convex hull of the visual file to allow for some wiggle room. Ideally, the ABB IRB1600 1.45 would be in a package called `abb_irb1600_6_145_moveit_config`, but I have not gotten that far yet. I have simply been reusing the `abb_irb1600_6_12_moveit_config` ros package. Once this is done, I can merge with the original repository hosted by [these guys](https://github.com/ros-industrial).
+
+## Liability
+
+I can take no responsibility for any actions by any entity through the use of any code or documentation or any other files provided in this repository. This software interfaces with big, large, dangerous robots that can kill you if you aren't paying attention, so use at your own risk.
 
 #### More good links:
 ```
